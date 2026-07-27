@@ -96,6 +96,17 @@
   .navlinks{display:flex; gap:28px; align-items:center;}
   .navlinks a{color:#C7D0DD; font-size:.88rem; font-weight:500; transition:color .2s;}
   .navlinks a:hover{color:#fff;}
+  .lang-switch{ display:flex; gap:6px; align-items:center; }
+  .lang-flag{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:8px;
+    width:auto; min-width:38px; height:32px; padding:0 10px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease, color .2s ease;
+    font-family:'JetBrains Mono', monospace; font-size:.72rem; font-weight:700; letter-spacing:.03em;
+    color:#9AA7BC; line-height:1;
+  }
+  .lang-flag:hover{ transform:translateY(-2px); border-color:var(--road); color:#fff; }
+  .lang-flag.active{ background:var(--road); border-color:var(--road); color:#fff; }
+  @media(max-width:860px){ .lang-switch{ justify-content:center; margin-top:4px; } }
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:11px 20px; border-radius:999px; font-weight:600; font-size:.9rem;
@@ -517,7 +528,7 @@
   .depo-card .stars{color:#F5B800; letter-spacing:2px; font-size:.95rem;}
   .depo-card p{margin-top:14px; font-size:.95rem; color:#3E4C63; line-height:1.6; font-style:italic;}
   .depo-card .who{margin-top:16px; font-family:'Oswald',sans-serif; font-size:.95rem; color:var(--ink);}
-  .depo-card .who span{display:block; font-family:'Rubik',sans-serif; font-size:.76rem; color:#8895A8; font-style:normal;}
+  .depo-card .who .who-service{display:block; font-family:'Rubik',sans-serif; font-size:.76rem; color:#8895A8; font-style:normal;}
   .depo-arrow{
     position:absolute; top:50%; transform:translateY(-50%); z-index:5;
     width:44px; height:44px; border-radius:50%; background:#fff; border:1px solid var(--line);
@@ -619,16 +630,21 @@
     <a href="#topo" class="brand">
       <img src="assets/logo.png" alt="RSACAR — Tudo em um só lugar">
     </a>
-    <button class="navburger" id="burger" aria-label="Abrir menu">☰</button>
+    <button class="navburger" id="burger" data-i18n-aria="aria.openMenu" aria-label="Abrir menu">☰</button>
     <div class="navlinks" id="navlinks">
-      <a href="#mvv">Missão</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#estrada">Diferenciais</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#videos">Vídeos</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#local">Localização</a>
-      <a class="btn btn-wpp" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener">💬 Chamar no Zap</a>
+      <a href="#mvv" data-i18n="nav.missao">Missão</a>
+      <a href="#sobre" data-i18n="nav.sobre">Sobre</a>
+      <a href="#estrada" data-i18n="nav.diferenciais">Diferenciais</a>
+      <a href="#servicos" data-i18n="nav.servicos">Serviços</a>
+      <a href="#videos" data-i18n="nav.videos">Vídeos</a>
+      <a href="#depoimentos" data-i18n="nav.depoimentos">Depoimentos</a>
+      <a href="#local" data-i18n="nav.local">Localização</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" class="lang-flag active" data-lang="pt" aria-label="Português">PT</button>
+        <button type="button" class="lang-flag" data-lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang-flag" data-lang="es" aria-label="Español">ES</button>
+      </div>
+      <a class="btn btn-wpp" data-wpp-msg="wpp.msgSchedule" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener" data-i18n="nav.wpp">💬 Chamar no Zap</a>
     </div>
   </nav>
 </header>
@@ -644,11 +660,11 @@
   <!-- SLIDE 1 -->
   <div class="hero-slide active" style="background-image:url('assets/hero-bg.jpg');">
     <div class="hero-inner">
-      <h1>Seu carro entra com <span class="accent">problema</span>,<br>sai <span class="accent">resolvido</span>.</h1>
-      <p class="lede">Tudo em um só lugar.</p>
+      <h1 data-i18n-html="hero.slide1.title">Seu carro entra com <span class="accent">problema</span>,<br>sai <span class="accent">resolvido</span>.</h1>
+      <p class="lede" data-i18n="hero.slide1.lede">Tudo em um só lugar.</p>
       <div class="hero-ctas">
-        <a class="btn btn-wpp btn-lg" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>
-        <a class="btn btn-dark btn-lg" href="https://www.youtube.com/@RSACAR" target="_blank" rel="noopener">▶ Ver no YouTube</a>
+        <a class="btn btn-wpp btn-lg" data-wpp-msg="wpp.msgSchedule" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener" data-i18n="cta.wppSchedule">💬 Chamar no WhatsApp</a>
+        <a class="btn btn-dark btn-lg" href="https://www.youtube.com/@RSACAR" target="_blank" rel="noopener" data-i18n="cta.youtube">▶ Ver no YouTube</a>
       </div>
     </div>
   </div>
@@ -656,10 +672,10 @@
   <!-- SLIDE 2 -->
   <div class="hero-slide" style="background-image:url('assets/hero-bg-2.jpg');">
     <div class="hero-inner">
-      <h1>Atendemos <span class="accent">80%</span> de toda a região do RJ!</h1>
-      <p class="lede">Agende aqui pelo Zap.</p>
+      <h1 data-i18n-html="hero.slide2.title">Atendemos <span class="accent">80%</span> de toda a região do RJ!</h1>
+      <p class="lede" data-i18n="hero.slide2.lede">Agende aqui pelo Zap.</p>
       <div class="hero-ctas">
-        <a class="btn btn-wpp btn-lg" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>
+        <a class="btn btn-wpp btn-lg" data-wpp-msg="wpp.msgSchedule" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener" data-i18n="cta.wppSchedule">💬 Chamar no WhatsApp</a>
       </div>
     </div>
   </div>
@@ -676,18 +692,18 @@
   <div class="hero-cards">
     <div class="hero-card">
       <div class="icon-badge">🔧</div>
-      <h4>36 anos de estrada</h4>
-      <p>Mecânica, elétrica e injeção eletrônica com RODRIGO MECÂNICO.</p>
+      <h4 data-i18n="heroCard.exp.title">36 anos de estrada</h4>
+      <p data-i18n="heroCard.exp.desc">Mecânica, elétrica e injeção eletrônica com RODRIGO MECÂNICO.</p>
     </div>
     <div class="hero-card">
       <div class="icon-badge">▶</div>
-      <h4>Vídeo novo toda semana</h4>
-      <p>Acompanhe o canal e entenda de verdade o que acontece no seu carro.</p>
+      <h4 data-i18n="heroCard.video.title">Vídeo novo toda semana</h4>
+      <p data-i18n="heroCard.video.desc">Acompanhe o canal e entenda de verdade o que acontece no seu carro.</p>
     </div>
     <div class="hero-card">
       <div class="icon-badge">🛠️</div>
-      <h4>6+ serviços especializados</h4>
-      <p>Tudo em um só lugar, sem precisar rodar em três oficinas diferentes.</p>
+      <h4 data-i18n="heroCard.services.title">6+ serviços especializados</h4>
+      <p data-i18n="heroCard.services.desc">Tudo em um só lugar, sem precisar rodar em três oficinas diferentes.</p>
     </div>
   </div>
 </div>
@@ -696,9 +712,9 @@
 <section class="mvv" id="mvv">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">QUEM SOMOS</span>
-      <h2>O que move a RSACAR</h2>
-      <p>Três engrenagens, um só objetivo: cuidar do seu carro de um jeito que faça você voltar sempre.</p>
+      <span class="eyebrow" data-i18n="mvv.eyebrow">QUEM SOMOS</span>
+      <h2 data-i18n="mvv.title">O que move a RSACAR</h2>
+      <p data-i18n="mvv.subtitle">Três engrenagens, um só objetivo: cuidar do seu carro de um jeito que faça você voltar sempre.</p>
     </div>
 
     <div class="mvv-grid reveal">
@@ -722,8 +738,8 @@
           <div class="gear-icon-circle">🎯</div>
           <div class="mvv-number">1</div>
         </div>
-        <h3>MISSÃO</h3>
-        <p>Cuidar do seu carro com trabalho de qualidade, garantia e atendimento de confiança para sua total tranquilidade.</p>
+        <h3 data-i18n="mvv.missao.title">MISSÃO</h3>
+        <p data-i18n="mvv.missao.desc">Cuidar do seu carro com trabalho de qualidade, garantia e atendimento de confiança para sua total tranquilidade.</p>
       </div>
 
       <div class="mvv-item">
@@ -746,8 +762,8 @@
           <div class="gear-icon-circle">🔭</div>
           <div class="mvv-number">2</div>
         </div>
-        <h3>VISÃO</h3>
-        <p>Tornar-se referência em serviços automotivos na região, oferecendo inovação, qualidade e excelência.</p>
+        <h3 data-i18n="mvv.visao.title">VISÃO</h3>
+        <p data-i18n="mvv.visao.desc">Tornar-se referência em serviços automotivos na região, oferecendo inovação, qualidade e excelência.</p>
       </div>
 
       <div class="mvv-item">
@@ -770,8 +786,8 @@
           <div class="gear-icon-circle">🤝</div>
           <div class="mvv-number">3</div>
         </div>
-        <h3>VALORES</h3>
-        <p>Entrega de resultados satisfatórios, com transparência e bom atendimento para a satisfação dos nossos clientes.</p>
+        <h3 data-i18n="mvv.valores.title">VALORES</h3>
+        <p data-i18n="mvv.valores.desc">Entrega de resultados satisfatórios, com transparência e bom atendimento para a satisfação dos nossos clientes.</p>
       </div>
     </div>
   </div>
@@ -781,50 +797,50 @@
 <section id="sobre" style="padding-top:50px;">
   <div class="wrap sobre-grid reveal">
     <div class="sobre-card">
-      <span class="role mono">TÉCNICO AUTOMOTIVO</span>
-      <h3>Rodrigo Mecânico</h3>
-      <p>36 anos de experiência em mecânica, elétrica e injeção eletrônica. Fundador da RSACAR e criador de conteúdo técnico no YouTube, com o objetivo de beneficiar o maior número de pessoas com serviços de qualidade e vídeos que ensinam de verdade.</p>
+      <span class="role mono" data-i18n="sobre.role">TÉCNICO AUTOMOTIVO</span>
+      <h3 data-i18n="sobre.name">Rodrigo Mecânico</h3>
+      <p data-i18n="sobre.bio">36 anos de experiência em mecânica, elétrica e injeção eletrônica. Fundador da RSACAR e criador de conteúdo técnico no YouTube, com o objetivo de beneficiar o maior número de pessoas com serviços de qualidade e vídeos que ensinam de verdade.</p>
       <div class="stat-row">
-        <div><strong>36</strong><span>ANOS DE ESTRADA</span></div>
-        <div><strong>100%</strong><span>MÃO NA MASSA</span></div>
+        <div><strong>36</strong><span data-i18n="sobre.stat1">ANOS DE ESTRADA</span></div>
+        <div><strong>100%</strong><span data-i18n="sobre.stat2">MÃO NA MASSA</span></div>
       </div>
     </div>
     <div class="sobre-text">
-      <span class="eyebrow">SOBRE A OFICINA</span>
-      <h2 style="margin-top:16px; margin-bottom:20px; font-size:clamp(1.8rem,4vw,2.4rem);">Uma oficina só, pra resolver tudo</h2>
-      <p>A RSACAR nasceu pra ser aquele lugar que todo motorista procura: onde o carro entra com qualquer problema — motor, elétrica, suspensão, injeção — e sai resolvido, sem precisar rodar em três oficinas diferentes.</p>
-      <p>Conhecimento técnico em vários tipos de carro, equipamentos adequados, peças de qualidade e um atendimento que explica o que está sendo feito. É assim que a gente entende "tudo em um só lugar".</p>
+      <span class="eyebrow" data-i18n="sobre.eyebrow">SOBRE A OFICINA</span>
+      <h2 style="margin-top:16px; margin-bottom:20px; font-size:clamp(1.8rem,4vw,2.4rem);" data-i18n="sobre.title">Uma oficina só, pra resolver tudo</h2>
+      <p data-i18n="sobre.p1">A RSACAR nasceu pra ser aquele lugar que todo motorista procura: onde o carro entra com qualquer problema — motor, elétrica, suspensão, injeção — e sai resolvido, sem precisar rodar em três oficinas diferentes.</p>
+      <p data-i18n="sobre.p2">Conhecimento técnico em vários tipos de carro, equipamentos adequados, peças de qualidade e um atendimento que explica o que está sendo feito. É assim que a gente entende "tudo em um só lugar".</p>
       <ul>
-        <li>Conhecimento de vários carros</li>
-        <li>Equipamentos e ferramentas próprias</li>
-        <li>Peças de qualidade garantida</li>
-        <li>Agendamento organizado</li>
+        <li data-i18n="sobre.li1">Conhecimento de vários carros</li>
+        <li data-i18n="sobre.li2">Equipamentos e ferramentas próprias</li>
+        <li data-i18n="sobre.li3">Peças de qualidade garantida</li>
+        <li data-i18n="sobre.li4">Agendamento organizado</li>
       </ul>
     </div>
   </div>
 
   <div class="wrap">
     <div class="diag-block reveal">
-      <h3 class="diag-title">Seu carro está te dando sinal?</h3>
-      <p class="diag-sub">Marque o que você está sentindo no seu carro e, ao clicar em "Agende conosco", esses sintomas já aparecem prontos na mensagem do WhatsApp.</p>
+      <h3 class="diag-title" data-i18n="diag.title">Seu carro está te dando sinal?</h3>
+      <p class="diag-sub" data-i18n="diag.subtitle">Marque o que você está sentindo no seu carro e, ao clicar em "Agende conosco", esses sintomas já aparecem prontos na mensagem do WhatsApp.</p>
 
       <div class="diag-checklist">
-        <button type="button" class="diag-item" data-label="Motor falhando"><span class="diag-icon">⚠️</span>Motor falhando</button>
-        <button type="button" class="diag-item" data-label="Carro está fraco"><span class="diag-icon">🐌</span>Carro está fraco</button>
-        <button type="button" class="diag-item" data-label="Consumindo muito combustível"><span class="diag-icon">⛽</span>Consumindo muito combustível</button>
-        <button type="button" class="diag-item" data-label="Não liga / motor não funciona"><span class="diag-icon">🔋</span>Não liga / motor não funciona</button>
-        <button type="button" class="diag-item" data-label="Dá partida mas nem gira o motor"><span class="diag-icon">🔑</span>Dá partida mas nem gira o motor</button>
-        <button type="button" class="diag-item" data-label="Barulho estranho no motor"><span class="diag-icon">🔊</span>Barulho estranho no motor</button>
-        <button type="button" class="diag-item" data-label="Luz de injeção acesa no painel"><span class="diag-icon">🔴</span>Luz de injeção acesa no painel</button>
-        <button type="button" class="diag-item" data-label='Freio fazendo barulho ou "mole"'><span class="diag-icon">🛑</span>Freio fazendo barulho ou "mole"</button>
-        <button type="button" class="diag-item" data-label="Câmbio duro pra trocar marcha"><span class="diag-icon">⚙️</span>Câmbio duro pra trocar marcha</button>
-        <button type="button" class="diag-item" data-label="Motor esquentando demais"><span class="diag-icon">🌡️</span>Motor esquentando demais</button>
-        <button type="button" class="diag-item" data-label="Vazamento de óleo ou fluido"><span class="diag-icon">🛢️</span>Vazamento de óleo ou fluido</button>
+        <button type="button" class="diag-item"><span class="diag-icon">⚠️</span><span class="diag-label" data-i18n="diag.sym1">Motor falhando</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🐌</span><span class="diag-label" data-i18n="diag.sym2">Carro está fraco</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">⛽</span><span class="diag-label" data-i18n="diag.sym3">Consumindo muito combustível</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🔋</span><span class="diag-label" data-i18n="diag.sym4">Não liga / motor não funciona</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🔑</span><span class="diag-label" data-i18n="diag.sym5">Dá partida mas nem gira o motor</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🔊</span><span class="diag-label" data-i18n="diag.sym6">Barulho estranho no motor</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🔴</span><span class="diag-label" data-i18n="diag.sym7">Luz de injeção acesa no painel</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🛑</span><span class="diag-label" data-i18n="diag.sym8">Freio fazendo barulho ou "mole"</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">⚙️</span><span class="diag-label" data-i18n="diag.sym9">Câmbio duro pra trocar marcha</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🌡️</span><span class="diag-label" data-i18n="diag.sym10">Motor esquentando demais</span></button>
+        <button type="button" class="diag-item"><span class="diag-icon">🛢️</span><span class="diag-label" data-i18n="diag.sym11">Vazamento de óleo ou fluido</span></button>
 
-        <button type="button" class="diag-item diag-item-add" id="diagAddBtn">+ Outro sintoma</button>
+        <button type="button" class="diag-item diag-item-add" id="diagAddBtn" data-i18n="diag.addOther">+ Outro sintoma</button>
 
         <span class="diag-custom-wrap" id="diagCustomWrap" style="display:none;">
-          <input type="text" class="diag-custom-input" id="diagCustomInput" placeholder="Digite o sintoma..." maxlength="60">
+          <input type="text" class="diag-custom-input" id="diagCustomInput" data-i18n-placeholder="diag.placeholder" placeholder="Digite o sintoma..." maxlength="60">
           <button type="button" class="diag-custom-confirm" id="diagCustomConfirm" aria-label="Adicionar sintoma">＋</button>
         </span>
       </div>
@@ -834,7 +850,7 @@
           <div class="diag-result-inner">
             <div class="diag-result-card">
               <p>Aqui na RSACAR temos a solução para estes e vários outros problemas! Trabalhamos com Diagnóstico Avançado! E o melhor? Além do diagnóstico, trabalhamos com a solução do problema!</p>
-              <a id="diagWppBtn" class="btn btn-wpp" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Meu%20carro%20est%C3%A1%20com%20um%20problema%20e%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">💬 Agende conosco</a>
+              <a id="diagWppBtn" class="btn btn-wpp" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Meu%20carro%20est%C3%A1%20com%20um%20problema%20e%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" data-i18n="diag.cta">💬 Agende conosco</a>
             </div>
           </div>
         </div>
@@ -847,9 +863,9 @@
 <section class="estrada" id="estrada">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">NOSSA ESTRADA</span>
-      <h2>O que nos trouxe até aqui</h2>
-      <p>Cada parada dessa estrada é um compromisso que a RSACAR carrega em todo atendimento — do primeiro contato até a entrega do carro pronto.</p>
+      <span class="eyebrow" data-i18n="estrada.eyebrow">NOSSA ESTRADA</span>
+      <h2 data-i18n="estrada.title">O que nos trouxe até aqui</h2>
+      <p data-i18n="estrada.subtitle">Cada parada dessa estrada é um compromisso que a RSACAR carrega em todo atendimento — do primeiro contato até a entrega do carro pronto.</p>
     </div>
 
     <div class="road-wrap reveal" id="roadWrap">
@@ -863,39 +879,39 @@
 
       <div class="road-items">
         <div class="road-item left" style="--item-color:var(--red)">
-          <div class="card"><div class="icon-badge">🔧</div><h4>Entrega de resultados satisfatórios</h4><p>O compromisso é entregar o carro resolvido, do jeito certo.</p></div>
+          <div class="card"><div class="icon-badge">🔧</div><h4 data-i18n="estrada.i1.title">Entrega de resultados satisfatórios</h4><p data-i18n="estrada.i1.desc">O compromisso é entregar o carro resolvido, do jeito certo.</p></div>
           <div class="dot"></div><div></div>
         </div>
         <div class="road-item right" style="--item-color:var(--teal)">
           <div></div><div class="dot"></div>
-          <div class="card"><div class="icon-badge">⚙️</div><h4>Organização</h4><p>Processo, diagnóstico e execução organizados do início ao fim.</p></div>
+          <div class="card"><div class="icon-badge">⚙️</div><h4 data-i18n="estrada.i2.title">Organização</h4><p data-i18n="estrada.i2.desc">Processo, diagnóstico e execução organizados do início ao fim.</p></div>
         </div>
         <div class="road-item left" style="--item-color:var(--orange)">
-          <div class="card"><div class="icon-badge">🚗</div><h4>Limpeza</h4><p>Carro entregue limpo, com respeito ao seu veículo.</p></div>
+          <div class="card"><div class="icon-badge">🚗</div><h4 data-i18n="estrada.i3.title">Limpeza</h4><p data-i18n="estrada.i3.desc">Carro entregue limpo, com respeito ao seu veículo.</p></div>
           <div class="dot"></div><div></div>
         </div>
         <div class="road-item right" style="--item-color:var(--steel)">
           <div></div><div class="dot"></div>
-          <div class="card"><div class="icon-badge">🛠️</div><h4>Qualificação técnica</h4><p>36 anos de estrada em mecânica, elétrica e injeção eletrônica.</p></div>
+          <div class="card"><div class="icon-badge">🛠️</div><h4 data-i18n="estrada.i4.title">Qualificação técnica</h4><p data-i18n="estrada.i4.desc">36 anos de estrada em mecânica, elétrica e injeção eletrônica.</p></div>
         </div>
         <div class="road-item left" style="--item-color:var(--orange)">
-          <div class="card"><div class="icon-badge">🧰</div><h4>Equipamentos</h4><p>Ferramental adequado pra cada tipo de serviço.</p></div>
+          <div class="card"><div class="icon-badge">🧰</div><h4 data-i18n="estrada.i5.title">Equipamentos</h4><p data-i18n="estrada.i5.desc">Ferramental adequado pra cada tipo de serviço.</p></div>
           <div class="dot"></div><div></div>
         </div>
         <div class="road-item right" style="--item-color:var(--green)">
           <div></div><div class="dot"></div>
-          <div class="card"><div class="icon-badge">🙂</div><h4>Bom atendimento</h4><p>Você entende o que está sendo feito no seu carro.</p></div>
+          <div class="card"><div class="icon-badge">🙂</div><h4 data-i18n="estrada.i6.title">Bom atendimento</h4><p data-i18n="estrada.i6.desc">Você entende o que está sendo feito no seu carro.</p></div>
         </div>
         <div class="road-item left" style="--item-color:var(--brown)">
-          <div class="card"><div class="icon-badge">🔩</div><h4>Serviços variados</h4><p>De motor a elétrica — resolve tudo em um só lugar.</p></div>
+          <div class="card"><div class="icon-badge">🔩</div><h4 data-i18n="estrada.i7.title">Serviços variados</h4><p data-i18n="estrada.i7.desc">De motor a elétrica — resolve tudo em um só lugar.</p></div>
           <div class="dot"></div><div></div>
         </div>
         <div class="road-item right" style="--item-color:var(--purple)">
           <div></div><div class="dot"></div>
-          <div class="card"><div class="icon-badge">🌀</div><h4>Peças de qualidade</h4><p>Peças confiáveis, sem gambiarra.</p></div>
+          <div class="card"><div class="icon-badge">🌀</div><h4 data-i18n="estrada.i8.title">Peças de qualidade</h4><p data-i18n="estrada.i8.desc">Peças confiáveis, sem gambiarra.</p></div>
         </div>
         <div class="road-item left" style="--item-color:var(--charcoal-2)">
-          <div class="card"><div class="icon-badge">📋</div><h4>Agendamento</h4><p>Chega no Zap, marca e já sabe o que esperar.</p></div>
+          <div class="card"><div class="icon-badge">📋</div><h4 data-i18n="estrada.i9.title">Agendamento</h4><p data-i18n="estrada.i9.desc">Chega no Zap, marca e já sabe o que esperar.</p></div>
           <div class="dot"></div><div></div>
         </div>
       </div>
@@ -907,9 +923,9 @@
 <section id="servicos">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">NOSSOS SERVIÇOS</span>
-      <h2>O que a RSACAR resolve</h2>
-      <p>Toque em cada card pra ver os benefícios. Da revisão simples ao problema mais chato de resolver.</p>
+      <span class="eyebrow" data-i18n="servicos.eyebrow">NOSSOS SERVIÇOS</span>
+      <h2 data-i18n="servicos.title">O que a RSACAR resolve</h2>
+      <p data-i18n="servicos.subtitle">Toque em cada card pra ver os benefícios. Da revisão simples ao problema mais chato de resolver.</p>
     </div>
 
     <div class="servicos-grid reveal">
@@ -917,19 +933,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">🔍</div>
-            <h4>Diagnóstico Avançado</h4>
-            <p>Identificamos falhas mecânicas e eletrônicas com equipamentos de última geração, oferecendo um diagnóstico rápido, preciso e confiável para o seu veículo.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv1.title">Diagnóstico Avançado</h4>
+            <p data-i18n="srv1.desc">Identificamos falhas mecânicas e eletrônicas com equipamentos de última geração, oferecendo um diagnóstico rápido, preciso e confiável para o seu veículo.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Scanner automotivo computadorizado</li>
-              <li>Identificação rápida de falhas</li>
-              <li>Economia em reparos desnecessários</li>
-              <li>Diagnóstico preciso e confiável</li>
+              <li data-i18n="srv1.b1">Scanner automotivo computadorizado</li>
+              <li data-i18n="srv1.b2">Identificação rápida de falhas</li>
+              <li data-i18n="srv1.b3">Economia em reparos desnecessários</li>
+              <li data-i18n="srv1.b4">Diagnóstico preciso e confiável</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -938,19 +954,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">⚡</div>
-            <h4>Injeção Eletrônica</h4>
-            <p>Realizamos manutenção completa no sistema de injeção eletrônica, garantindo melhor desempenho, economia de combustível e funcionamento eficiente do motor.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv2.title">Injeção Eletrônica</h4>
+            <p data-i18n="srv2.desc">Realizamos manutenção completa no sistema de injeção eletrônica, garantindo melhor desempenho, economia de combustível e funcionamento eficiente do motor.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Limpeza de bicos injetores</li>
-              <li>Diagnóstico de sensores e atuadores</li>
-              <li>Melhor desempenho do motor</li>
-              <li>Redução no consumo de combustível</li>
+              <li data-i18n="srv2.b1">Limpeza de bicos injetores</li>
+              <li data-i18n="srv2.b2">Diagnóstico de sensores e atuadores</li>
+              <li data-i18n="srv2.b3">Melhor desempenho do motor</li>
+              <li data-i18n="srv2.b4">Redução no consumo de combustível</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -959,19 +975,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">🔧</div>
-            <h4>Motor Geral</h4>
-            <p>Executamos serviços de manutenção e reparo em motores nacionais e importados, sempre com foco na qualidade, desempenho e durabilidade.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv3.title">Motor Geral</h4>
+            <p data-i18n="srv3.desc">Executamos serviços de manutenção e reparo em motores nacionais e importados, sempre com foco na qualidade, desempenho e durabilidade.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Troca de correia dentada</li>
-              <li>Reparo de vazamentos</li>
-              <li>Manutenção do sistema de arrefecimento</li>
-              <li>Maior vida útil do motor</li>
+              <li data-i18n="srv3.b1">Troca de correia dentada</li>
+              <li data-i18n="srv3.b2">Reparo de vazamentos</li>
+              <li data-i18n="srv3.b3">Manutenção do sistema de arrefecimento</li>
+              <li data-i18n="srv3.b4">Maior vida útil do motor</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -980,19 +996,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">🛡️</div>
-            <h4>Revisão Preventiva</h4>
-            <p>Inspecionamos os principais sistemas do veículo para evitar falhas inesperadas, reduzindo custos e aumentando a segurança nas suas viagens.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv4.title">Revisão Preventiva</h4>
+            <p data-i18n="srv4.desc">Inspecionamos os principais sistemas do veículo para evitar falhas inesperadas, reduzindo custos e aumentando a segurança nas suas viagens.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Evita quebras inesperadas</li>
-              <li>Aumenta a segurança do veículo</li>
-              <li>Reduz gastos com manutenção</li>
-              <li>Preserva o valor do automóvel</li>
+              <li data-i18n="srv4.b1">Evita quebras inesperadas</li>
+              <li data-i18n="srv4.b2">Aumenta a segurança do veículo</li>
+              <li data-i18n="srv4.b3">Reduz gastos com manutenção</li>
+              <li data-i18n="srv4.b4">Preserva o valor do automóvel</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -1001,19 +1017,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">🛠️</div>
-            <h4>Revisão Corretiva</h4>
-            <p>Corrigimos defeitos mecânicos e eletrônicos com precisão, restaurando o desempenho e a confiabilidade do seu veículo.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv5.title">Revisão Corretiva</h4>
+            <p data-i18n="srv5.desc">Corrigimos defeitos mecânicos e eletrônicos com precisão, restaurando o desempenho e a confiabilidade do seu veículo.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Solução definitiva do problema</li>
-              <li>Peças e serviços de qualidade</li>
-              <li>Veículo com desempenho restaurado</li>
-              <li>Maior tranquilidade para dirigir</li>
+              <li data-i18n="srv5.b1">Solução definitiva do problema</li>
+              <li data-i18n="srv5.b2">Peças e serviços de qualidade</li>
+              <li data-i18n="srv5.b3">Veículo com desempenho restaurado</li>
+              <li data-i18n="srv5.b4">Maior tranquilidade para dirigir</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -1022,19 +1038,19 @@
         <div class="servico-card-inner">
           <div class="servico-face servico-front">
             <div class="servico-icon-badge">📈</div>
-            <h4>Revisão Preditiva</h4>
-            <p>Analisamos o estado dos componentes para identificar desgastes antes que se transformem em problemas, evitando paradas inesperadas e gastos maiores.</p>
-            <span class="servico-hint">TOQUE PARA VER OS BENEFÍCIOS →</span>
+            <h4 data-i18n="srv6.title">Revisão Preditiva</h4>
+            <p data-i18n="srv6.desc">Analisamos o estado dos componentes para identificar desgastes antes que se transformem em problemas, evitando paradas inesperadas e gastos maiores.</p>
+            <span class="servico-hint" data-i18n="servicos.hintFront">TOQUE PARA VER OS BENEFÍCIOS →</span>
           </div>
           <div class="servico-face servico-back">
-            <h4>Benefícios</h4>
+            <h4 data-i18n="servicos.benefitsTitle">Benefícios</h4>
             <ul>
-              <li>Antecipação de possíveis falhas</li>
-              <li>Menor risco de pane</li>
-              <li>Planejamento da manutenção</li>
-              <li>Economia a longo prazo</li>
+              <li data-i18n="srv6.b1">Antecipação de possíveis falhas</li>
+              <li data-i18n="srv6.b2">Menor risco de pane</li>
+              <li data-i18n="srv6.b3">Planejamento da manutenção</li>
+              <li data-i18n="srv6.b4">Economia a longo prazo</li>
             </ul>
-            <span class="servico-hint">← TOQUE PARA VOLTAR</span>
+            <span class="servico-hint" data-i18n="servicos.hintBack">← TOQUE PARA VOLTAR</span>
           </div>
         </div>
       </div>
@@ -1046,16 +1062,16 @@
 <section class="videos-section" id="videos">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">CANAL NO YOUTUBE</span>
-      <h2>Vídeo novo, toda semana</h2>
-      <p>Rodrigo ensina de verdade — diagnóstico, manutenção e dicas pra quem quer entender o próprio carro.</p>
+      <span class="eyebrow" data-i18n="videos.eyebrow">CANAL NO YOUTUBE</span>
+      <h2 data-i18n="videos.title">Vídeo novo, toda semana</h2>
+      <p data-i18n="videos.subtitle">Rodrigo ensina de verdade — diagnóstico, manutenção e dicas pra quem quer entender o próprio carro.</p>
     </div>
     <div class="video-frame" id="videoFrame">
-      <iframe id="videoIframe" src="https://www.youtube.com/embed/videoseries?list=UUIC3J6cY4SXgqdvyOCcPWbQ" title="Vídeos do canal RSACAR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <iframe id="videoIframe" src="https://www.youtube.com/embed/videoseries?list=UUIC3J6cY4SXgqdvyOCcPWbQ" data-i18n-title="videos.iframeTitle" title="Vídeos do canal RSACAR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
     <div class="video-cta">
-      <p>Toda semana tem vídeo novo de mecânica de verdade, sem enrolação.</p>
-      <a class="btn btn-wpp" href="https://www.youtube.com/@RSACAR?sub_confirmation=1" target="_blank" rel="noopener">▶ Inscreva-se no canal</a>
+      <p data-i18n="videos.ctaText">Toda semana tem vídeo novo de mecânica de verdade, sem enrolação.</p>
+      <a class="btn btn-wpp" href="https://www.youtube.com/@RSACAR?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="videos.ctaButton">▶ Inscreva-se no canal</a>
     </div>
   </div>
 </section>
@@ -1064,81 +1080,81 @@
 <section id="depoimentos">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">DEPOIMENTOS</span>
-      <h2>Quem já chamou no Zap</h2>
-      <p>A opinião de quem já resolveu o carro com a gente.</p>
+      <span class="eyebrow" data-i18n="depo.eyebrow">DEPOIMENTOS</span>
+      <h2 data-i18n="depo.title">Quem já chamou no Zap</h2>
+      <p data-i18n="depo.subtitle">A opinião de quem já resolveu o carro com a gente.</p>
     </div>
   </div>
 
   <div class="depo-marquee-outer reveal">
-    <button class="depo-arrow depo-arrow-left" id="depoPrev" aria-label="Depoimento anterior">‹</button>
+    <button class="depo-arrow depo-arrow-left" id="depoPrev" data-i18n-aria="aria.depoPrev" aria-label="Depoimento anterior">‹</button>
     <div class="depo-marquee-wrap" id="depoTrackWrap">
       <div class="depo-track" id="depoTrack">
       <!-- Conjunto 1 -->
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Levei o carro com um problema elétrico que já tinha passado por duas oficinas. Resolveram no mesmo dia e explicaram tudo."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Elétrica</span></div>
+        <p data-i18n="depo1.text">"Levei o carro com um problema elétrico que já tinha passado por duas oficinas. Resolveram no mesmo dia e explicaram tudo."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo1.service">Serviço: Elétrica</span></div>
       </div>
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Atendimento organizado, preço justo e o carro saiu limpinho. Virei cliente fixo."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Revisão geral</span></div>
+        <p data-i18n="depo2.text">"Atendimento organizado, preço justo e o carro saiu limpinho. Virei cliente fixo."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo2.service">Serviço: Revisão geral</span></div>
       </div>
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Acompanho os vídeos do canal e quando precisei de verdade, já sabia que confiava no trabalho."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Injeção eletrônica</span></div>
+        <p data-i18n="depo3.text">"Acompanho os vídeos do canal e quando precisei de verdade, já sabia que confiava no trabalho."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo3.service">Serviço: Injeção eletrônica</span></div>
       </div>
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Diagnóstico rápido e certeiro. Economizei porque não precisei trocar peça que outra oficina tinha indicado."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Diagnóstico avançado</span></div>
+        <p data-i18n="depo4.text">"Diagnóstico rápido e certeiro. Economizei porque não precisei trocar peça que outra oficina tinha indicado."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo4.service">Serviço: Diagnóstico avançado</span></div>
       </div>
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Fiz a revisão preventiva antes de uma viagem longa e rodei tranquilo. Recomendo demais."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Revisão preventiva</span></div>
+        <p data-i18n="depo5.text">"Fiz a revisão preventiva antes de uma viagem longa e rodei tranquilo. Recomendo demais."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo5.service">Serviço: Revisão preventiva</span></div>
       </div>
       <div class="depo-card">
         <div class="stars">★★★★★</div>
-        <p>"Explicaram certinho o problema do motor antes de mexer. Confiança total no trabalho deles."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Motor geral</span></div>
+        <p data-i18n="depo6.text">"Explicaram certinho o problema do motor antes de mexer. Confiança total no trabalho deles."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo6.service">Serviço: Motor geral</span></div>
       </div>
       <!-- Conjunto 2 (duplicado, pra esteira rodar sem emenda) -->
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Levei o carro com um problema elétrico que já tinha passado por duas oficinas. Resolveram no mesmo dia e explicaram tudo."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Elétrica</span></div>
+        <p data-i18n="depo1.text">"Levei o carro com um problema elétrico que já tinha passado por duas oficinas. Resolveram no mesmo dia e explicaram tudo."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo1.service">Serviço: Elétrica</span></div>
       </div>
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Atendimento organizado, preço justo e o carro saiu limpinho. Virei cliente fixo."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Revisão geral</span></div>
+        <p data-i18n="depo2.text">"Atendimento organizado, preço justo e o carro saiu limpinho. Virei cliente fixo."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo2.service">Serviço: Revisão geral</span></div>
       </div>
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Acompanho os vídeos do canal e quando precisei de verdade, já sabia que confiava no trabalho."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Injeção eletrônica</span></div>
+        <p data-i18n="depo3.text">"Acompanho os vídeos do canal e quando precisei de verdade, já sabia que confiava no trabalho."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo3.service">Serviço: Injeção eletrônica</span></div>
       </div>
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Diagnóstico rápido e certeiro. Economizei porque não precisei trocar peça que outra oficina tinha indicado."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Diagnóstico avançado</span></div>
+        <p data-i18n="depo4.text">"Diagnóstico rápido e certeiro. Economizei porque não precisei trocar peça que outra oficina tinha indicado."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo4.service">Serviço: Diagnóstico avançado</span></div>
       </div>
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Fiz a revisão preventiva antes de uma viagem longa e rodei tranquilo. Recomendo demais."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Revisão preventiva</span></div>
+        <p data-i18n="depo5.text">"Fiz a revisão preventiva antes de uma viagem longa e rodei tranquilo. Recomendo demais."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo5.service">Serviço: Revisão preventiva</span></div>
       </div>
       <div class="depo-card" aria-hidden="true">
         <div class="stars">★★★★★</div>
-        <p>"Explicaram certinho o problema do motor antes de mexer. Confiança total no trabalho deles."</p>
-        <div class="who">Cliente RSACAR <span>Serviço: Motor geral</span></div>
+        <p data-i18n="depo6.text">"Explicaram certinho o problema do motor antes de mexer. Confiança total no trabalho deles."</p>
+        <div class="who"><span data-i18n="depo.clientLabel">Cliente RSACAR</span> <span class="who-service" data-i18n="depo6.service">Serviço: Motor geral</span></div>
       </div>
       </div>
     </div>
-    <button class="depo-arrow depo-arrow-right" id="depoNext" aria-label="Próximo depoimento">›</button>
+    <button class="depo-arrow depo-arrow-right" id="depoNext" data-i18n-aria="aria.depoNext" aria-label="Próximo depoimento">›</button>
   </div>
 </section>
 
@@ -1146,32 +1162,32 @@
 <section id="local">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">LOCALIZAÇÃO</span>
-      <h2>Onde a RSACAR te espera</h2>
+      <span class="eyebrow" data-i18n="local.eyebrow">LOCALIZAÇÃO</span>
+      <h2 data-i18n="local.title">Onde a RSACAR te espera</h2>
     </div>
     <div class="local-grid reveal">
       <div class="local-info">
-        <h3>Informações</h3>
+        <h3 data-i18n="local.infoTitle">Informações</h3>
         <div class="local-row">
           <div class="ico">📍</div>
-          <div><strong>Endereço</strong><span>R. Roraima, nº 156, Morada do Contorno, Resende, RJ</span></div>
+          <div><strong data-i18n="local.addressLabel">Endereço</strong><span>R. Roraima, nº 156, Morada do Contorno, Resende, RJ</span></div>
         </div>
         <div class="local-row">
           <div class="ico">🕒</div>
-          <div><strong>Horário</strong><span>Segunda a sexta, das 08:00 às 18:00</span></div>
+          <div><strong data-i18n="local.hoursLabel">Horário</strong><span data-i18n="local.hoursValue">Segunda a sexta, das 08:00 às 18:00</span></div>
         </div>
         <div class="local-row">
           <div class="ico">💬</div>
-          <div><strong>WhatsApp</strong><span>(24) 98854-0793</span></div>
+          <div><strong data-i18n="local.wppLabel">WhatsApp</strong><span>(24) 98854-0793</span></div>
         </div>
         <div class="local-row">
           <div class="ico">▶</div>
-          <div><strong>YouTube</strong><span>@RSACAR</span></div>
+          <div><strong data-i18n="local.youtubeLabel">YouTube</strong><span>@RSACAR</span></div>
         </div>
-        <a class="btn btn-wpp" style="margin-top:10px;" href="https://wa.me/5524988540793" target="_blank" rel="noopener">💬 Falar agora no WhatsApp</a>
+        <a class="btn btn-wpp" style="margin-top:10px;" href="https://wa.me/5524988540793" target="_blank" rel="noopener" data-i18n="local.cta">💬 Falar agora no WhatsApp</a>
       </div>
       <div class="map-frame">
-        <iframe src="https://www.google.com/maps?q=R.%20Roraima%2C%20156%2C%20Morada%20do%20Contorno%2C%20Resende%2C%20RJ&output=embed" loading="lazy" title="Mapa RSACAR"></iframe>
+        <iframe src="https://www.google.com/maps?q=R.%20Roraima%2C%20156%2C%20Morada%20do%20Contorno%2C%20Resende%2C%20RJ&output=embed" loading="lazy" data-i18n-title="local.mapTitle" title="Mapa RSACAR"></iframe>
       </div>
     </div>
   </div>
@@ -1180,9 +1196,9 @@
 <!-- ================= CTA FINAL ================= -->
 <section class="cta-final">
   <div class="wrap">
-    <h2 style="margin-top:18px;">Bateu, quebrou, chiou?<br>Chama no zap.</h2>
-    <p>Resposta rápida, diagnóstico direto e serviço feito com 36 anos de estrada.</p>
-    <a class="btn btn-wpp btn-lg" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>
+    <h2 style="margin-top:18px;" data-i18n-html="ctaFinal.title">Bateu, quebrou, chiou?<br>Chama no zap.</h2>
+    <p data-i18n="ctaFinal.subtitle">Resposta rápida, diagnóstico direto e serviço feito com 36 anos de estrada.</p>
+    <a class="btn btn-wpp btn-lg" data-wpp-msg="wpp.msgSchedule" href="https://wa.me/5524988540793?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener" data-i18n="cta.wppSchedule">💬 Chamar no WhatsApp</a>
   </div>
 </section>
 
@@ -1198,15 +1214,18 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© <span id="year"></span> RSACAR. Todos os direitos reservados.</span>
-    <span class="mono">MECÂNICA · ELÉTRICA · INJEÇÃO ELETRÔNICA</span>
+    <span>© <span id="year"></span> RSACAR. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+    <span class="mono" data-i18n="footer.tagline">MECÂNICA · ELÉTRICA · INJEÇÃO ELETRÔNICA</span>
   </div>
 </footer>
 
 <!-- ================= VOLTAR AO TOPO ================= -->
-<button class="top-float" id="topFloatBtn" aria-label="Voltar ao topo">↑</button>
+<button class="top-float" id="topFloatBtn" data-i18n-aria="aria.backToTop" aria-label="Voltar ao topo">↑</button>
 
 <script>
+  window.I18N = {"pt": {"nav.missao": "Missão", "nav.sobre": "Sobre", "nav.diferenciais": "Diferenciais", "nav.servicos": "Serviços", "nav.videos": "Vídeos", "nav.depoimentos": "Depoimentos", "nav.local": "Localização", "nav.wpp": "💬 Chamar no Zap", "aria.openMenu": "Abrir menu", "aria.backToTop": "Voltar ao topo", "aria.depoPrev": "Depoimento anterior", "aria.depoNext": "Próximo depoimento", "hero.slide1.title": "Seu carro entra com <span class=\"accent\">problema</span>,<br>sai <span class=\"accent\">resolvido</span>.", "hero.slide1.lede": "Tudo em um só lugar.", "hero.slide2.title": "Atendemos <span class=\"accent\">80%</span> de toda a região do RJ!", "hero.slide2.lede": "Agende aqui pelo Zap.", "cta.wppSchedule": "💬 Chamar no WhatsApp", "cta.youtube": "▶ Ver no YouTube", "heroCard.exp.title": "36 anos de estrada", "heroCard.exp.desc": "Mecânica, elétrica e injeção eletrônica com RODRIGO MECÂNICO.", "heroCard.video.title": "Vídeo novo toda semana", "heroCard.video.desc": "Acompanhe o canal e entenda de verdade o que acontece no seu carro.", "heroCard.services.title": "6+ serviços especializados", "heroCard.services.desc": "Tudo em um só lugar, sem precisar rodar em três oficinas diferentes.", "mvv.eyebrow": "QUEM SOMOS", "mvv.title": "O que move a RSACAR", "mvv.subtitle": "Três engrenagens, um só objetivo: cuidar do seu carro de um jeito que faça você voltar sempre.", "mvv.missao.title": "MISSÃO", "mvv.missao.desc": "Cuidar do seu carro com trabalho de qualidade, garantia e atendimento de confiança para sua total tranquilidade.", "mvv.visao.title": "VISÃO", "mvv.visao.desc": "Tornar-se referência em serviços automotivos na região, oferecendo inovação, qualidade e excelência.", "mvv.valores.title": "VALORES", "mvv.valores.desc": "Entrega de resultados satisfatórios, com transparência e bom atendimento para a satisfação dos nossos clientes.", "sobre.role": "TÉCNICO AUTOMOTIVO", "sobre.name": "Rodrigo Mecânico", "sobre.bio": "36 anos de experiência em mecânica, elétrica e injeção eletrônica. Fundador da RSACAR e criador de conteúdo técnico no YouTube, com o objetivo de beneficiar o maior número de pessoas com serviços de qualidade e vídeos que ensinam de verdade.", "sobre.stat1": "ANOS DE ESTRADA", "sobre.stat2": "MÃO NA MASSA", "sobre.eyebrow": "SOBRE A OFICINA", "sobre.title": "Uma oficina só, pra resolver tudo", "sobre.p1": "A RSACAR nasceu pra ser aquele lugar que todo motorista procura: onde o carro entra com qualquer problema — motor, elétrica, suspensão, injeção — e sai resolvido, sem precisar rodar em três oficinas diferentes.", "sobre.p2": "Conhecimento técnico em vários tipos de carro, equipamentos adequados, peças de qualidade e um atendimento que explica o que está sendo feito. É assim que a gente entende \"tudo em um só lugar\".", "sobre.li1": "Conhecimento de vários carros", "sobre.li2": "Equipamentos e ferramentas próprias", "sobre.li3": "Peças de qualidade garantida", "sobre.li4": "Agendamento organizado", "diag.title": "Seu carro está te dando sinal?", "diag.subtitle": "Marque o que você está sentindo no seu carro e, ao clicar em \"Agende conosco\", esses sintomas já aparecem prontos na mensagem do WhatsApp.", "diag.sym1": "Motor falhando", "diag.sym2": "Carro está fraco", "diag.sym3": "Consumindo muito combustível", "diag.sym4": "Não liga / motor não funciona", "diag.sym5": "Dá partida mas nem gira o motor", "diag.sym6": "Barulho estranho no motor", "diag.sym7": "Luz de injeção acesa no painel", "diag.sym8": "Freio fazendo barulho ou \"mole\"", "diag.sym9": "Câmbio duro pra trocar marcha", "diag.sym10": "Motor esquentando demais", "diag.sym11": "Vazamento de óleo ou fluido", "diag.addOther": "+ Outro sintoma", "diag.placeholder": "Digite o sintoma...", "diag.cta": "💬 Agende conosco", "diag.msgDefault": "Olá! Meu carro está com um problema e quero agendar uma avaliação.", "diag.msgIntro": "Olá! Meu carro está com os seguintes sintomas:", "diag.msgOutro": "Quero agendar uma avaliação.", "estrada.eyebrow": "NOSSA ESTRADA", "estrada.title": "O que nos trouxe até aqui", "estrada.subtitle": "Cada parada dessa estrada é um compromisso que a RSACAR carrega em todo atendimento — do primeiro contato até a entrega do carro pronto.", "estrada.i1.title": "Entrega de resultados satisfatórios", "estrada.i1.desc": "O compromisso é entregar o carro resolvido, do jeito certo.", "estrada.i2.title": "Organização", "estrada.i2.desc": "Processo, diagnóstico e execução organizados do início ao fim.", "estrada.i3.title": "Limpeza", "estrada.i3.desc": "Carro entregue limpo, com respeito ao seu veículo.", "estrada.i4.title": "Qualificação técnica", "estrada.i4.desc": "36 anos de estrada em mecânica, elétrica e injeção eletrônica.", "estrada.i5.title": "Equipamentos", "estrada.i5.desc": "Ferramental adequado pra cada tipo de serviço.", "estrada.i6.title": "Bom atendimento", "estrada.i6.desc": "Você entende o que está sendo feito no seu carro.", "estrada.i7.title": "Serviços variados", "estrada.i7.desc": "De motor a elétrica — resolve tudo em um só lugar.", "estrada.i8.title": "Peças de qualidade", "estrada.i8.desc": "Peças confiáveis, sem gambiarra.", "estrada.i9.title": "Agendamento", "estrada.i9.desc": "Chega no Zap, marca e já sabe o que esperar.", "servicos.eyebrow": "NOSSOS SERVIÇOS", "servicos.title": "O que a RSACAR resolve", "servicos.subtitle": "Toque em cada card pra ver os benefícios. Da revisão simples ao problema mais chato de resolver.", "servicos.hintFront": "TOQUE PARA VER OS BENEFÍCIOS →", "servicos.hintBack": "← TOQUE PARA VOLTAR", "servicos.benefitsTitle": "Benefícios", "srv1.title": "Diagnóstico Avançado", "srv1.desc": "Identificamos falhas mecânicas e eletrônicas com equipamentos de última geração, oferecendo um diagnóstico rápido, preciso e confiável para o seu veículo.", "srv1.b1": "Scanner automotivo computadorizado", "srv1.b2": "Identificação rápida de falhas", "srv1.b3": "Economia em reparos desnecessários", "srv1.b4": "Diagnóstico preciso e confiável", "srv2.title": "Injeção Eletrônica", "srv2.desc": "Realizamos manutenção completa no sistema de injeção eletrônica, garantindo melhor desempenho, economia de combustível e funcionamento eficiente do motor.", "srv2.b1": "Limpeza de bicos injetores", "srv2.b2": "Diagnóstico de sensores e atuadores", "srv2.b3": "Melhor desempenho do motor", "srv2.b4": "Redução no consumo de combustível", "srv3.title": "Motor Geral", "srv3.desc": "Executamos serviços de manutenção e reparo em motores nacionais e importados, sempre com foco na qualidade, desempenho e durabilidade.", "srv3.b1": "Troca de correia dentada", "srv3.b2": "Reparo de vazamentos", "srv3.b3": "Manutenção do sistema de arrefecimento", "srv3.b4": "Maior vida útil do motor", "srv4.title": "Revisão Preventiva", "srv4.desc": "Inspecionamos os principais sistemas do veículo para evitar falhas inesperadas, reduzindo custos e aumentando a segurança nas suas viagens.", "srv4.b1": "Evita quebras inesperadas", "srv4.b2": "Aumenta a segurança do veículo", "srv4.b3": "Reduz gastos com manutenção", "srv4.b4": "Preserva o valor do automóvel", "srv5.title": "Revisão Corretiva", "srv5.desc": "Corrigimos defeitos mecânicos e eletrônicos com precisão, restaurando o desempenho e a confiabilidade do seu veículo.", "srv5.b1": "Solução definitiva do problema", "srv5.b2": "Peças e serviços de qualidade", "srv5.b3": "Veículo com desempenho restaurado", "srv5.b4": "Maior tranquilidade para dirigir", "srv6.title": "Revisão Preditiva", "srv6.desc": "Analisamos o estado dos componentes para identificar desgastes antes que se transformem em problemas, evitando paradas inesperadas e gastos maiores.", "srv6.b1": "Antecipação de possíveis falhas", "srv6.b2": "Menor risco de pane", "srv6.b3": "Planejamento da manutenção", "srv6.b4": "Economia a longo prazo", "videos.eyebrow": "CANAL NO YOUTUBE", "videos.title": "Vídeo novo, toda semana", "videos.subtitle": "Rodrigo ensina de verdade — diagnóstico, manutenção e dicas pra quem quer entender o próprio carro.", "videos.iframeTitle": "Vídeos do canal RSACAR", "videos.ctaText": "Toda semana tem vídeo novo de mecânica de verdade, sem enrolação.", "videos.ctaButton": "▶ Inscreva-se no canal", "depo.eyebrow": "DEPOIMENTOS", "depo.title": "Quem já chamou no Zap", "depo.subtitle": "A opinião de quem já resolveu o carro com a gente.", "depo.clientLabel": "Cliente RSACAR", "depo1.text": "\"Levei o carro com um problema elétrico que já tinha passado por duas oficinas. Resolveram no mesmo dia e explicaram tudo.\"", "depo1.service": "Serviço: Elétrica", "depo2.text": "\"Atendimento organizado, preço justo e o carro saiu limpinho. Virei cliente fixo.\"", "depo2.service": "Serviço: Revisão geral", "depo3.text": "\"Acompanho os vídeos do canal e quando precisei de verdade, já sabia que confiava no trabalho.\"", "depo3.service": "Serviço: Injeção eletrônica", "depo4.text": "\"Diagnóstico rápido e certeiro. Economizei porque não precisei trocar peça que outra oficina tinha indicado.\"", "depo4.service": "Serviço: Diagnóstico avançado", "depo5.text": "\"Fiz a revisão preventiva antes de uma viagem longa e rodei tranquilo. Recomendo demais.\"", "depo5.service": "Serviço: Revisão preventiva", "depo6.text": "\"Explicaram certinho o problema do motor antes de mexer. Confiança total no trabalho deles.\"", "depo6.service": "Serviço: Motor geral", "local.eyebrow": "LOCALIZAÇÃO", "local.title": "Onde a RSACAR te espera", "local.infoTitle": "Informações", "local.addressLabel": "Endereço", "local.hoursLabel": "Horário", "local.hoursValue": "Segunda a sexta, das 08:00 às 18:00", "local.wppLabel": "WhatsApp", "local.youtubeLabel": "YouTube", "local.cta": "💬 Falar agora no WhatsApp", "local.mapTitle": "Mapa RSACAR", "ctaFinal.title": "Bateu, quebrou, chiou?<br>Chama no zap.", "ctaFinal.subtitle": "Resposta rápida, diagnóstico direto e serviço feito com 36 anos de estrada.", "footer.rights": "Todos os direitos reservados.", "footer.tagline": "MECÂNICA · ELÉTRICA · INJEÇÃO ELETRÔNICA", "wpp.msgSchedule": "Olá! Vim pelo site e quero agendar um serviço."}, "en": {"nav.missao": "Mission", "nav.sobre": "About", "nav.diferenciais": "Why Us", "nav.servicos": "Services", "nav.videos": "Videos", "nav.depoimentos": "Testimonials", "nav.local": "Location", "nav.wpp": "💬 Chat on WhatsApp", "aria.openMenu": "Open menu", "aria.backToTop": "Back to top", "aria.depoPrev": "Previous testimonial", "aria.depoNext": "Next testimonial", "hero.slide1.title": "Your car comes in with a <span class=\"accent\">problem</span>,<br>leaves <span class=\"accent\">fixed</span>.", "hero.slide1.lede": "Everything in one place.", "hero.slide2.title": "We serve <span class=\"accent\">80%</span> of the entire Rio de Janeiro region!", "hero.slide2.lede": "Book here on WhatsApp.", "cta.wppSchedule": "💬 Message on WhatsApp", "cta.youtube": "▶ Watch on YouTube", "heroCard.exp.title": "36 years on the road", "heroCard.exp.desc": "Mechanical, electrical and fuel injection work with RODRIGO MECÂNICO.", "heroCard.video.title": "New video every week", "heroCard.video.desc": "Follow the channel and really understand what's going on with your car.", "heroCard.services.title": "6+ specialized services", "heroCard.services.desc": "Everything in one place, no need to visit three different shops.", "mvv.eyebrow": "WHO WE ARE", "mvv.title": "What drives RSACAR", "mvv.subtitle": "Three gears, one goal: taking care of your car in a way that makes you come back every time.", "mvv.missao.title": "MISSION", "mvv.missao.desc": "Taking care of your car with quality work, warranty and trustworthy service for your total peace of mind.", "mvv.visao.title": "VISION", "mvv.visao.desc": "Becoming a reference in automotive services in the region, offering innovation, quality and excellence.", "mvv.valores.title": "VALUES", "mvv.valores.desc": "Delivering satisfactory results, with transparency and great service for our customers' satisfaction.", "sobre.role": "AUTOMOTIVE TECHNICIAN", "sobre.name": "Rodrigo Mecânico", "sobre.bio": "36 years of experience in mechanics, electrical systems and fuel injection. Founder of RSACAR and creator of technical content on YouTube, with the goal of helping as many people as possible with quality service and videos that really teach.", "sobre.stat1": "YEARS ON THE ROAD", "sobre.stat2": "HANDS-ON", "sobre.eyebrow": "ABOUT THE SHOP", "sobre.title": "One shop, to solve it all", "sobre.p1": "RSACAR was created to be that place every driver looks for: where the car comes in with any problem — engine, electrical, suspension, injection — and leaves fixed, without having to drive around to three different shops.", "sobre.p2": "Technical knowledge in many types of cars, proper equipment, quality parts and service that explains what's being done. That's how we understand \"everything in one place\".", "sobre.li1": "Knowledge of many car types", "sobre.li2": "Own equipment and tools", "sobre.li3": "Guaranteed quality parts", "sobre.li4": "Organized scheduling", "diag.title": "Is your car giving you signs?", "diag.subtitle": "Check what you're noticing in your car and, when you click \"Book with us,\" those symptoms will already appear ready in the WhatsApp message.", "diag.sym1": "Engine misfiring", "diag.sym2": "Car feels weak", "diag.sym3": "Using too much fuel", "diag.sym4": "Won't start / engine doesn't run", "diag.sym5": "Turns the key but the engine won't even crank", "diag.sym6": "Strange noise in the engine", "diag.sym7": "Check engine light is on", "diag.sym8": "Brakes making noise or feeling \"spongy\"", "diag.sym9": "Gearbox is hard to shift", "diag.sym10": "Engine overheating", "diag.sym11": "Oil or fluid leak", "diag.addOther": "+ Other symptom", "diag.placeholder": "Type the symptom...", "diag.cta": "💬 Book with us", "diag.msgDefault": "Hello! My car has a problem and I'd like to book an assessment.", "diag.msgIntro": "Hello! My car has the following symptoms:", "diag.msgOutro": "I'd like to book an assessment.", "estrada.eyebrow": "OUR ROAD", "estrada.title": "What brought us here", "estrada.subtitle": "Every stop on this road is a commitment RSACAR carries through every visit — from the first contact to handing back your finished car.", "estrada.i1.title": "Delivering satisfactory results", "estrada.i1.desc": "The commitment is to hand back the car fixed, the right way.", "estrada.i2.title": "Organization", "estrada.i2.desc": "Process, diagnosis and execution organized from start to finish.", "estrada.i3.title": "Cleanliness", "estrada.i3.desc": "Car delivered clean, with respect for your vehicle.", "estrada.i4.title": "Technical qualification", "estrada.i4.desc": "36 years of experience in mechanics, electrical systems and fuel injection.", "estrada.i5.title": "Equipment", "estrada.i5.desc": "The right tools for each type of service.", "estrada.i6.title": "Great service", "estrada.i6.desc": "You understand what's being done to your car.", "estrada.i7.title": "A wide range of services", "estrada.i7.desc": "From engine to electrical — everything solved in one place.", "estrada.i8.title": "Quality parts", "estrada.i8.desc": "Reliable parts, no shortcuts.", "estrada.i9.title": "Scheduling", "estrada.i9.desc": "Message us on WhatsApp, book, and know exactly what to expect.", "servicos.eyebrow": "OUR SERVICES", "servicos.title": "What RSACAR fixes", "servicos.subtitle": "Tap each card to see the benefits. From a simple check-up to the trickiest problem to solve.", "servicos.hintFront": "TAP TO SEE THE BENEFITS →", "servicos.hintBack": "← TAP TO GO BACK", "servicos.benefitsTitle": "Benefits", "srv1.title": "Advanced Diagnostics", "srv1.desc": "We identify mechanical and electronic faults with state-of-the-art equipment, offering a fast, precise and reliable diagnosis for your vehicle.", "srv1.b1": "Computerized automotive scanner", "srv1.b2": "Fast fault identification", "srv1.b3": "Savings on unnecessary repairs", "srv1.b4": "Precise and reliable diagnosis", "srv2.title": "Fuel Injection", "srv2.desc": "We perform complete maintenance on the fuel injection system, ensuring better performance, fuel savings and efficient engine operation.", "srv2.b1": "Fuel injector cleaning", "srv2.b2": "Sensor and actuator diagnostics", "srv2.b3": "Better engine performance", "srv2.b4": "Reduced fuel consumption", "srv3.title": "General Engine Work", "srv3.desc": "We perform maintenance and repair services on domestic and imported engines, always focused on quality, performance and durability.", "srv3.b1": "Timing belt replacement", "srv3.b2": "Leak repairs", "srv3.b3": "Cooling system maintenance", "srv3.b4": "Longer engine lifespan", "srv4.title": "Preventive Check-up", "srv4.desc": "We inspect the vehicle's main systems to prevent unexpected failures, reducing costs and increasing safety on your trips.", "srv4.b1": "Prevents unexpected breakdowns", "srv4.b2": "Increases vehicle safety", "srv4.b3": "Reduces maintenance costs", "srv4.b4": "Preserves the car's resale value", "srv5.title": "Corrective Repair", "srv5.desc": "We fix mechanical and electronic defects with precision, restoring your vehicle's performance and reliability.", "srv5.b1": "Definitive solution to the problem", "srv5.b2": "Quality parts and service", "srv5.b3": "Vehicle with restored performance", "srv5.b4": "More peace of mind while driving", "srv6.title": "Predictive Maintenance", "srv6.desc": "We analyze the condition of components to identify wear before it becomes a problem, avoiding unexpected breakdowns and bigger expenses.", "srv6.b1": "Anticipating possible failures", "srv6.b2": "Lower risk of breakdown", "srv6.b3": "Maintenance planning", "srv6.b4": "Long-term savings", "videos.eyebrow": "YOUTUBE CHANNEL", "videos.title": "New video, every week", "videos.subtitle": "Rodrigo really teaches — diagnostics, maintenance and tips for anyone who wants to understand their own car.", "videos.iframeTitle": "Videos from the RSACAR channel", "videos.ctaText": "Every week there's a new video of real mechanics, no fluff.", "videos.ctaButton": "▶ Subscribe to the channel", "depo.eyebrow": "TESTIMONIALS", "depo.title": "Who's already messaged us", "depo.subtitle": "What people who've already fixed their car with us have to say.", "depo.clientLabel": "RSACAR Customer", "depo1.text": "\"I brought my car in with an electrical problem that had already been through two other shops. They fixed it the same day and explained everything.\"", "depo1.service": "Service: Electrical", "depo2.text": "\"Organized service, fair price, and the car came out spotless. I became a regular customer.\"", "depo2.service": "Service: General check-up", "depo3.text": "\"I follow the channel's videos, and when I really needed help, I already knew I could trust the work.\"", "depo3.service": "Service: Fuel injection", "depo4.text": "\"Fast and accurate diagnosis. I saved money because I didn't need to replace a part another shop had recommended.\"", "depo4.service": "Service: Advanced diagnostics", "depo5.text": "\"I got the preventive check-up before a long trip and drove worry-free. Highly recommend.\"", "depo5.service": "Service: Preventive check-up", "depo6.text": "\"They explained the engine problem clearly before touching anything. Total trust in their work.\"", "depo6.service": "Service: General engine work", "local.eyebrow": "LOCATION", "local.title": "Where RSACAR is waiting for you", "local.infoTitle": "Information", "local.addressLabel": "Address", "local.hoursLabel": "Hours", "local.hoursValue": "Monday to Friday, 8:00 AM to 6:00 PM", "local.wppLabel": "WhatsApp", "local.youtubeLabel": "YouTube", "local.cta": "💬 Message us now on WhatsApp", "local.mapTitle": "RSACAR Map", "ctaFinal.title": "Bumped it, broke it, hear it squeak?<br>Message us on WhatsApp.", "ctaFinal.subtitle": "Quick reply, straightforward diagnosis, and work backed by 36 years of experience.", "footer.rights": "All rights reserved.", "footer.tagline": "MECHANICS · ELECTRICAL · FUEL INJECTION", "wpp.msgSchedule": "Hello! I came from the website and I'd like to book a service."}, "es": {"nav.missao": "Misión", "nav.sobre": "Nosotros", "nav.diferenciais": "Diferenciales", "nav.servicos": "Servicios", "nav.videos": "Vídeos", "nav.depoimentos": "Testimonios", "nav.local": "Ubicación", "nav.wpp": "💬 Chatear por WhatsApp", "aria.openMenu": "Abrir menú", "aria.backToTop": "Volver arriba", "aria.depoPrev": "Testimonio anterior", "aria.depoNext": "Testimonio siguiente", "hero.slide1.title": "Tu auto entra con un <span class=\"accent\">problema</span>,<br>sale <span class=\"accent\">resuelto</span>.", "hero.slide1.lede": "Todo en un solo lugar.", "hero.slide2.title": "¡Atendemos al <span class=\"accent\">80%</span> de toda la región de Río de Janeiro!", "hero.slide2.lede": "Agenda aquí por WhatsApp.", "cta.wppSchedule": "💬 Escribir por WhatsApp", "cta.youtube": "▶ Ver en YouTube", "heroCard.exp.title": "36 años de trayectoria", "heroCard.exp.desc": "Mecánica, eléctrica e inyección electrónica con RODRIGO MECÁNICO.", "heroCard.video.title": "Video nuevo cada semana", "heroCard.video.desc": "Sigue el canal y entiende de verdad lo que pasa con tu auto.", "heroCard.services.title": "6+ servicios especializados", "heroCard.services.desc": "Todo en un solo lugar, sin necesidad de recorrer tres talleres diferentes.", "mvv.eyebrow": "QUIÉNES SOMOS", "mvv.title": "Lo que impulsa a RSACAR", "mvv.subtitle": "Tres engranajes, un solo objetivo: cuidar tu auto de una manera que te haga volver siempre.", "mvv.missao.title": "MISIÓN", "mvv.missao.desc": "Cuidar tu auto con trabajo de calidad, garantía y atención de confianza para tu total tranquilidad.", "mvv.visao.title": "VISIÓN", "mvv.visao.desc": "Convertirnos en referencia en servicios automotrices de la región, ofreciendo innovación, calidad y excelencia.", "mvv.valores.title": "VALORES", "mvv.valores.desc": "Entrega de resultados satisfactorios, con transparencia y buena atención para la satisfacción de nuestros clientes.", "sobre.role": "TÉCNICO AUTOMOTRIZ", "sobre.name": "Rodrigo Mecánico", "sobre.bio": "36 años de experiencia en mecánica, eléctrica e inyección electrónica. Fundador de RSACAR y creador de contenido técnico en YouTube, con el objetivo de beneficiar a la mayor cantidad de personas con servicios de calidad y videos que enseñan de verdad.", "sobre.stat1": "AÑOS DE TRAYECTORIA", "sobre.stat2": "MANOS A LA OBRA", "sobre.eyebrow": "SOBRE EL TALLER", "sobre.title": "Un solo taller, para resolverlo todo", "sobre.p1": "RSACAR nació para ser ese lugar que todo conductor busca: donde el auto entra con cualquier problema —motor, eléctrico, suspensión, inyección— y sale resuelto, sin necesidad de recorrer tres talleres diferentes.", "sobre.p2": "Conocimiento técnico en varios tipos de auto, equipos adecuados, piezas de calidad y una atención que explica lo que se está haciendo. Así es como entendemos \"todo en un solo lugar\".", "sobre.li1": "Conocimiento de varios autos", "sobre.li2": "Equipos y herramientas propias", "sobre.li3": "Piezas de calidad garantizada", "sobre.li4": "Programación organizada", "diag.title": "¿Tu auto te está dando señales?", "diag.subtitle": "Marca lo que estás notando en tu auto y, al hacer clic en \"Agenda con nosotros\", esos síntomas ya aparecerán listos en el mensaje de WhatsApp.", "diag.sym1": "Motor fallando", "diag.sym2": "El auto está débil", "diag.sym3": "Consumiendo mucho combustible", "diag.sym4": "No enciende / el motor no funciona", "diag.sym5": "Arranca pero el motor ni siquiera gira", "diag.sym6": "Ruido extraño en el motor", "diag.sym7": "Luz de inyección encendida en el tablero", "diag.sym8": "Frenos haciendo ruido o \"blandos\"", "diag.sym9": "Caja de cambios dura para cambiar de marcha", "diag.sym10": "Motor se calienta demasiado", "diag.sym11": "Fuga de aceite o líquido", "diag.addOther": "+ Otro síntoma", "diag.placeholder": "Escribe el síntoma...", "diag.cta": "💬 Agenda con nosotros", "diag.msgDefault": "¡Hola! Mi auto tiene un problema y quiero agendar una evaluación.", "diag.msgIntro": "¡Hola! Mi auto presenta los siguientes síntomas:", "diag.msgOutro": "Quiero agendar una evaluación.", "estrada.eyebrow": "NUESTRO CAMINO", "estrada.title": "Lo que nos trajo hasta aquí", "estrada.subtitle": "Cada parada de este camino es un compromiso que RSACAR lleva en cada atención, desde el primer contacto hasta la entrega del auto listo.", "estrada.i1.title": "Entrega de resultados satisfactorios", "estrada.i1.desc": "El compromiso es entregar el auto resuelto, de la forma correcta.", "estrada.i2.title": "Organización", "estrada.i2.desc": "Proceso, diagnóstico y ejecución organizados de principio a fin.", "estrada.i3.title": "Limpieza", "estrada.i3.desc": "Auto entregado limpio, con respeto por tu vehículo.", "estrada.i4.title": "Calificación técnica", "estrada.i4.desc": "36 años de trayectoria en mecánica, eléctrica e inyección electrónica.", "estrada.i5.title": "Equipos", "estrada.i5.desc": "Herramientas adecuadas para cada tipo de servicio.", "estrada.i6.title": "Buena atención", "estrada.i6.desc": "Entiendes lo que se está haciendo en tu auto.", "estrada.i7.title": "Servicios variados", "estrada.i7.desc": "Del motor a la eléctrica: resuelve todo en un solo lugar.", "estrada.i8.title": "Piezas de calidad", "estrada.i8.desc": "Piezas confiables, sin improvisaciones.", "estrada.i9.title": "Programación", "estrada.i9.desc": "Escribe por WhatsApp, agenda y ya sabes qué esperar.", "servicos.eyebrow": "NUESTROS SERVICIOS", "servicos.title": "Lo que RSACAR resuelve", "servicos.subtitle": "Toca cada tarjeta para ver los beneficios. Desde una revisión simple hasta el problema más difícil de resolver.", "servicos.hintFront": "TOCA PARA VER LOS BENEFICIOS →", "servicos.hintBack": "← TOCA PARA VOLVER", "servicos.benefitsTitle": "Beneficios", "srv1.title": "Diagnóstico Avanzado", "srv1.desc": "Identificamos fallas mecánicas y electrónicas con equipos de última generación, ofreciendo un diagnóstico rápido, preciso y confiable para tu vehículo.", "srv1.b1": "Escáner automotriz computarizado", "srv1.b2": "Identificación rápida de fallas", "srv1.b3": "Ahorro en reparaciones innecesarias", "srv1.b4": "Diagnóstico preciso y confiable", "srv2.title": "Inyección Electrónica", "srv2.desc": "Realizamos mantenimiento completo del sistema de inyección electrónica, garantizando mejor rendimiento, ahorro de combustible y funcionamiento eficiente del motor.", "srv2.b1": "Limpieza de inyectores", "srv2.b2": "Diagnóstico de sensores y actuadores", "srv2.b3": "Mejor rendimiento del motor", "srv2.b4": "Reducción del consumo de combustible", "srv3.title": "Motor General", "srv3.desc": "Realizamos servicios de mantenimiento y reparación en motores nacionales e importados, siempre enfocados en calidad, rendimiento y durabilidad.", "srv3.b1": "Cambio de correa de distribución", "srv3.b2": "Reparación de fugas", "srv3.b3": "Mantenimiento del sistema de refrigeración", "srv3.b4": "Mayor vida útil del motor", "srv4.title": "Revisión Preventiva", "srv4.desc": "Inspeccionamos los principales sistemas del vehículo para evitar fallas inesperadas, reduciendo costos y aumentando la seguridad en tus viajes.", "srv4.b1": "Evita averías inesperadas", "srv4.b2": "Aumenta la seguridad del vehículo", "srv4.b3": "Reduce gastos de mantenimiento", "srv4.b4": "Preserva el valor del automóvil", "srv5.title": "Revisión Correctiva", "srv5.desc": "Corregimos defectos mecánicos y electrónicos con precisión, restaurando el rendimiento y la confiabilidad de tu vehículo.", "srv5.b1": "Solución definitiva del problema", "srv5.b2": "Piezas y servicios de calidad", "srv5.b3": "Vehículo con rendimiento restaurado", "srv5.b4": "Mayor tranquilidad al conducir", "srv6.title": "Revisión Predictiva", "srv6.desc": "Analizamos el estado de los componentes para identificar desgastes antes de que se conviertan en problemas, evitando paradas inesperadas y gastos mayores.", "srv6.b1": "Anticipación de posibles fallas", "srv6.b2": "Menor riesgo de avería", "srv6.b3": "Planificación del mantenimiento", "srv6.b4": "Ahorro a largo plazo", "videos.eyebrow": "CANAL DE YOUTUBE", "videos.title": "Video nuevo, cada semana", "videos.subtitle": "Rodrigo enseña de verdad: diagnóstico, mantenimiento y consejos para quien quiere entender su propio auto.", "videos.iframeTitle": "Videos del canal RSACAR", "videos.ctaText": "Cada semana hay un video nuevo de mecánica de verdad, sin rodeos.", "videos.ctaButton": "▶ Suscríbete al canal", "depo.eyebrow": "TESTIMONIOS", "depo.title": "Quiénes ya nos escribieron", "depo.subtitle": "La opinión de quienes ya resolvieron su auto con nosotros.", "depo.clientLabel": "Cliente RSACAR", "depo1.text": "\"Llevé el auto con un problema eléctrico que ya había pasado por dos talleres. Lo resolvieron el mismo día y me explicaron todo.\"", "depo1.service": "Servicio: Eléctrica", "depo2.text": "\"Atención organizada, precio justo y el auto salió limpito. Me volví cliente fijo.\"", "depo2.service": "Servicio: Revisión general", "depo3.text": "\"Sigo los videos del canal y cuando realmente lo necesité, ya sabía que confiaba en el trabajo.\"", "depo3.service": "Servicio: Inyección electrónica", "depo4.text": "\"Diagnóstico rápido y certero. Ahorré porque no necesité cambiar una pieza que otro taller había indicado.\"", "depo4.service": "Servicio: Diagnóstico avanzado", "depo5.text": "\"Hice la revisión preventiva antes de un viaje largo y manejé tranquilo. Lo recomiendo muchísimo.\"", "depo5.service": "Servicio: Revisión preventiva", "depo6.text": "\"Me explicaron bien el problema del motor antes de tocarlo. Confianza total en su trabajo.\"", "depo6.service": "Servicio: Motor general", "local.eyebrow": "UBICACIÓN", "local.title": "Dónde te espera RSACAR", "local.infoTitle": "Información", "local.addressLabel": "Dirección", "local.hoursLabel": "Horario", "local.hoursValue": "Lunes a viernes, de 08:00 a 18:00", "local.wppLabel": "WhatsApp", "local.youtubeLabel": "YouTube", "local.cta": "💬 Escribir ahora por WhatsApp", "local.mapTitle": "Mapa RSACAR", "ctaFinal.title": "¿Chocaste, se rompió, hace ruido?<br>Escríbenos por WhatsApp.", "ctaFinal.subtitle": "Respuesta rápida, diagnóstico directo y trabajo respaldado por 36 años de trayectoria.", "footer.rights": "Todos los derechos reservados.", "footer.tagline": "MECÁNICA · ELÉCTRICA · INYECCIÓN ELECTRÓNICA", "wpp.msgSchedule": "¡Hola! Vine desde el sitio web y quiero agendar un servicio."}};
+  window.currentLang = 'pt';
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Botão flutuante de voltar ao topo
@@ -1239,15 +1258,32 @@
       return document.querySelectorAll('.diag-item:not(.diag-item-add)');
     }
 
+    function getLabel(item){
+      const span = item.querySelector('.diag-label');
+      if(span) return span.textContent.trim();
+      // chip personalizado: pega o texto direto, ignorando o botão de remover
+      const clone = item.cloneNode(true);
+      const removeBtn = clone.querySelector('.diag-remove');
+      if(removeBtn) removeBtn.remove();
+      return clone.textContent.trim();
+    }
+
+    function t(key){
+      const lang = window.currentLang || 'pt';
+      return (window.I18N && window.I18N[lang] && window.I18N[lang][key]) || '';
+    }
+
     function buildMessage(){
       const checked = Array.from(getAllItems())
         .filter(item => item.classList.contains('active'))
-        .map(item => item.dataset.label);
+        .map(getLabel);
       if(checked.length === 0){
-        return 'Olá! Meu carro está com um problema e quero agendar uma avaliação.';
+        return t('diag.msgDefault') || 'Olá! Meu carro está com um problema e quero agendar uma avaliação.';
       }
       const list = checked.map((label, i) => `${i + 1}. ${label}`).join('\n');
-      return `Olá! Meu carro está com os seguintes sintomas:\n${list}\n\nQuero agendar uma avaliação.`;
+      const intro = t('diag.msgIntro') || 'Olá! Meu carro está com os seguintes sintomas:';
+      const outro = t('diag.msgOutro') || 'Quero agendar uma avaliação.';
+      return `${intro}\n${list}\n\n${outro}`;
     }
 
     function update(){
@@ -1257,6 +1293,7 @@
         wppBtn.href = `https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(buildMessage())}`;
       }
     }
+    window.diagUpdate = update;
 
     function bindItem(item){
       item.addEventListener('click', (e) => {
@@ -1288,7 +1325,6 @@
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'diag-item custom active';
-      chip.dataset.label = label;
       chip.innerHTML = `${label}<span class="diag-remove">×</span>`;
       bindItem(chip);
 
@@ -1512,6 +1548,87 @@
   } else {
     carMarker.style.display = 'none';
   }
+
+  /* =========================================================
+     IDIOMAS (PT / EN / ES)
+     -----------------------------------------------------------
+     Cada texto do site tem uma "chave" (data-i18n) e o dicionário
+     window.I18N guarda a tradução de cada chave nos 3 idiomas.
+     Pra adicionar/editar um texto: crie a chave no HTML e preencha
+     as 3 traduções em window.I18N logo no início deste <script>.
+  ========================================================= */
+  (function i18nSetup(){
+    const WPP_NUMBER = '5524988540793';
+
+    function t(lang, key){
+      return (window.I18N[lang] && window.I18N[lang][key]) || (window.I18N.pt && window.I18N.pt[key]) || '';
+    }
+
+    function applyLanguage(lang){
+      if(!window.I18N[lang]) lang = 'pt';
+      window.currentLang = lang;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = t(lang, key);
+        if(value) el.textContent = value;
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        const value = t(lang, key);
+        if(value) el.innerHTML = value;
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const value = t(lang, key);
+        if(value) el.setAttribute('placeholder', value);
+      });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria');
+        const value = t(lang, key);
+        if(value) el.setAttribute('aria-label', value);
+      });
+
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        const value = t(lang, key);
+        if(value) el.setAttribute('title', value);
+      });
+
+      document.querySelectorAll('[data-wpp-msg]').forEach(el => {
+        const key = el.getAttribute('data-wpp-msg');
+        const msg = t(lang, key);
+        if(msg) el.setAttribute('href', `https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)}`);
+      });
+
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+
+      document.querySelectorAll('.lang-flag').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      try{ localStorage.setItem('rsacar_lang', lang); }catch(e){}
+
+      // Atualiza a mensagem dinâmica do diagnóstico (sintomas marcados) no novo idioma
+      if(typeof window.diagUpdate === 'function') window.diagUpdate();
+    }
+
+    document.querySelectorAll('.lang-flag').forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+
+    let initialLang = 'pt';
+    try{
+      const saved = localStorage.getItem('rsacar_lang');
+      if(saved && window.I18N[saved]) initialLang = saved;
+    }catch(e){}
+
+    applyLanguage(initialLang);
+    window.applyLanguage = applyLanguage;
+  })();
 </script>
 
 </body>

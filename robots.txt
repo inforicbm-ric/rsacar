@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inforicbm-ric.github.io/rsacar/sitemap.xml

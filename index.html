@@ -701,6 +701,78 @@
   .top-float.show{ opacity:1; visibility:visible; transform:translateY(0); }
   .top-float:hover{ background:#1BA84A; }
 
+  /* ---------- WIDGET DE ACESSIBILIDADE ---------- */
+  .a11y-widget{ position:fixed; bottom:26px; left:26px; z-index:999; }
+  .a11y-toggle{
+    width:56px; height:56px; border-radius:50%; background:var(--ink); color:#fff;
+    border:none; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,.3); transition:background .2s ease, transform .2s ease;
+  }
+  .a11y-toggle:hover{ background:var(--road); transform:translateY(-2px); }
+  .a11y-panel{
+    position:absolute; bottom:calc(100% + 12px); left:0; width:250px;
+    background:#fff; border-radius:16px; box-shadow:0 20px 45px rgba(0,0,0,.25);
+    padding:18px; opacity:0; visibility:hidden; transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  .a11y-widget.open .a11y-panel{ opacity:1; visibility:visible; transform:translateY(0); }
+  .a11y-panel h4{
+    font-family:'Oswald',sans-serif; font-size:1rem; text-transform:none; letter-spacing:0;
+    color:var(--ink); margin-bottom:14px;
+  }
+  .a11y-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .a11y-row span{ font-size:.85rem; color:#5A6B84; }
+  .a11y-font-btns{ display:flex; gap:6px; }
+  .a11y-font-btns button{
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--bg);
+    cursor:pointer; font-size:.8rem; font-weight:700; color:var(--ink); transition:background .15s ease;
+  }
+  .a11y-font-btns button:hover{ background:var(--road); color:#fff; border-color:var(--road); }
+  .a11y-option{
+    display:flex; align-items:center; justify-content:space-between; width:100%;
+    background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    padding:9px 12px; margin-bottom:8px; font-size:.85rem; color:var(--ink); cursor:pointer;
+    transition:border-color .15s ease;
+  }
+  .a11y-option .a11y-check{ width:16px; height:16px; border-radius:4px; border:1.5px solid var(--line); flex-shrink:0; }
+  .a11y-option.active{ border-color:var(--road); }
+  .a11y-option.active .a11y-check{ background:var(--road); border-color:var(--road); }
+  .a11y-reset{
+    width:100%; text-align:center; background:none; border:none; color:var(--road);
+    font-size:.8rem; font-weight:600; cursor:pointer; margin-top:6px; padding:6px;
+  }
+  .a11y-reset:hover{ text-decoration:underline; }
+
+  /* Estados aplicados pelo widget */
+  html.a11y-font-lg{ font-size:112.5%; }
+  html.a11y-font-xl{ font-size:125%; }
+  body.a11y-underline a{ text-decoration:underline !important; }
+  body.a11y-contrast{ background:#000 !important; }
+  body.a11y-contrast section, body.a11y-contrast header, body.a11y-contrast footer,
+  body.a11y-contrast .depo-card, body.a11y-contrast .servico-face, body.a11y-contrast .road-item .card,
+  body.a11y-contrast .stat-card, body.a11y-contrast .hero-card, body.a11y-contrast .diag-block,
+  body.a11y-contrast .local-info, body.a11y-contrast .a11y-panel,
+  body.a11y-contrast .a11y-option, body.a11y-contrast .a11y-font-btns button,
+  body.a11y-contrast .diag-result-card, body.a11y-contrast .diag-item, body.a11y-contrast .servico-card{
+    background:#000 !important; color:#fff !important; border-color:#FFD400 !important;
+  }
+  body.a11y-contrast h1, body.a11y-contrast h2, body.a11y-contrast h3, body.a11y-contrast h4,
+  body.a11y-contrast p, body.a11y-contrast span, body.a11y-contrast li, body.a11y-contrast strong,
+  body.a11y-contrast button{
+    color:#fff !important;
+  }
+  body.a11y-contrast a{ color:#FFD400 !important; }
+  body.a11y-contrast .btn{ background:#FFD400 !important; color:#000 !important; }
+  body.a11y-contrast .accent{ color:#FFD400 !important; }
+  body.a11y-contrast .a11y-check{ border-color:#FFD400 !important; }
+  body.a11y-contrast .a11y-option.active .a11y-check{ background:#FFD400 !important; }
+  html.a11y-no-motion *{
+    animation:none !important; transition-duration:0s !important; scroll-behavior:auto !important;
+  }
+  html.a11y-no-motion .reveal{ opacity:1 !important; transform:none !important; }
+  html.a11y-no-motion .hero-eyebrow-txt, html.a11y-no-motion .hero h1,
+  html.a11y-no-motion .hero p.lede, html.a11y-no-motion .hero-ctas{ opacity:1 !important; transform:none !important; }
+
   /* ---------- REVEAL AO ROLAR ---------- */
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.in-view{opacity:1; transform:translateY(0);}
@@ -1358,6 +1430,41 @@
 </footer>
 
 <!-- ================= VOLTAR AO TOPO ================= -->
+<!-- ================= WIDGET DE ACESSIBILIDADE ================= -->
+<div class="a11y-widget" id="a11yWidget">
+  <button class="a11y-toggle" id="a11yToggleBtn" aria-haspopup="true" aria-expanded="false" aria-label="Opções de acessibilidade">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+      <circle cx="13" cy="4.5" r="2"/>
+      <rect x="11.3" y="7" width="3.4" height="5" rx="1.5"/>
+      <rect x="12.2" y="10.8" width="6.5" height="2.1" rx="1" transform="rotate(34 12.2 10.8)"/>
+      <rect x="7.5" y="12" width="6" height="2.1" rx="1"/>
+      <circle cx="9" cy="17.3" r="4.3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="16.2" cy="19.3" r="1.1"/>
+    </svg>
+  </button>
+  <div class="a11y-panel" id="a11yPanel">
+    <h4>Acessibilidade</h4>
+    <div class="a11y-row">
+      <span>Tamanho da fonte</span>
+      <div class="a11y-font-btns">
+        <button type="button" data-a11y="font-dec" aria-label="Diminuir fonte">A−</button>
+        <button type="button" data-a11y="font-reset" aria-label="Fonte padrão">A</button>
+        <button type="button" data-a11y="font-inc" aria-label="Aumentar fonte">A+</button>
+      </div>
+    </div>
+    <button type="button" class="a11y-option" data-a11y="contrast">
+      <span>Alto contraste</span><span class="a11y-check"></span>
+    </button>
+    <button type="button" class="a11y-option" data-a11y="motion">
+      <span>Pausar animações</span><span class="a11y-check"></span>
+    </button>
+    <button type="button" class="a11y-option" data-a11y="underline">
+      <span>Sublinhar links</span><span class="a11y-check"></span>
+    </button>
+    <button type="button" class="a11y-reset" data-a11y="reset">Restaurar padrão</button>
+  </div>
+</div>
+
 <button class="top-float" id="topFloatBtn" data-i18n-aria="aria.backToTop" aria-label="Voltar ao topo">↑</button>
 
 <script>
@@ -1419,6 +1526,101 @@
     window.addEventListener('scroll', () => requestAnimationFrame(update));
     window.addEventListener('resize', update);
     update();
+  })();
+
+  // Widget de acessibilidade
+  (function a11yWidget(){
+    const widget = document.getElementById('a11yWidget');
+    const toggleBtn = document.getElementById('a11yToggleBtn');
+    const panel = document.getElementById('a11yPanel');
+    if(!widget || !toggleBtn) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const FONT_LEVELS = ['normal', 'a11y-font-lg', 'a11y-font-xl'];
+    let fontLevel = 0;
+
+    function applyFont(){
+      html.classList.remove('a11y-font-lg', 'a11y-font-xl');
+      if(FONT_LEVELS[fontLevel] !== 'normal') html.classList.add(FONT_LEVELS[fontLevel]);
+      saveState();
+    }
+
+    function toggleOption(key, btn){
+      const cls = 'a11y-' + key;
+      body.classList.toggle(cls);
+      const active = body.classList.contains(cls);
+      btn.classList.toggle('active', active);
+      if(key === 'motion') html.classList.toggle('a11y-no-motion', active);
+      saveState();
+    }
+
+    function saveState(){
+      try{
+        localStorage.setItem('rsacar_a11y', JSON.stringify({
+          fontLevel,
+          contrast: body.classList.contains('a11y-contrast'),
+          motion: body.classList.contains('a11y-motion'),
+          underline: body.classList.contains('a11y-underline'),
+        }));
+      }catch(e){}
+    }
+
+    function loadState(){
+      let state;
+      try{ state = JSON.parse(localStorage.getItem('rsacar_a11y')); }catch(e){}
+      if(!state) return;
+      fontLevel = state.fontLevel || 0;
+      applyFont();
+      ['contrast','motion','underline'].forEach(key => {
+        if(state[key]){
+          const btn = panel.querySelector(`[data-a11y="${key}"]`);
+          if(btn) toggleOption(key, btn);
+        }
+      });
+    }
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = widget.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if(widget.classList.contains('open') && !widget.contains(e.target)){
+        widget.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    panel.querySelector('[data-a11y="font-inc"]').addEventListener('click', () => {
+      fontLevel = Math.min(FONT_LEVELS.length - 1, fontLevel + 1);
+      applyFont();
+    });
+    panel.querySelector('[data-a11y="font-dec"]').addEventListener('click', () => {
+      fontLevel = Math.max(0, fontLevel - 1);
+      applyFont();
+    });
+    panel.querySelector('[data-a11y="font-reset"]').addEventListener('click', () => {
+      fontLevel = 0;
+      applyFont();
+    });
+
+    ['contrast','motion','underline'].forEach(key => {
+      const btn = panel.querySelector(`[data-a11y="${key}"]`);
+      btn.addEventListener('click', () => toggleOption(key, btn));
+    });
+
+    panel.querySelector('[data-a11y="reset"]').addEventListener('click', () => {
+      fontLevel = 0;
+      applyFont();
+      html.classList.remove('a11y-no-motion');
+      body.classList.remove('a11y-contrast', 'a11y-motion', 'a11y-underline');
+      panel.querySelectorAll('.a11y-option').forEach(b => b.classList.remove('active'));
+      saveState();
+    });
+
+    loadState();
   })();
 
   (function topFloat(){

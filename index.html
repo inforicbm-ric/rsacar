@@ -702,13 +702,14 @@
   .top-float:hover{ background:#1BA84A; }
 
   /* ---------- WIDGET DE ACESSIBILIDADE ---------- */
-  .a11y-widget{ position:fixed; bottom:26px; left:26px; z-index:999; }
+  .a11y-widget{ position:fixed; bottom:26px; left:26px; z-index:999; touch-action:none; }
   .a11y-toggle{
-    width:56px; height:56px; border-radius:50%; background:var(--ink); color:#fff;
-    border:none; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 26px rgba(0,0,0,.3); transition:background .2s ease, transform .2s ease;
+    width:56px; height:56px; border-radius:50%; background:var(--road); color:#fff;
+    border:none; font-size:1.5rem; cursor:grab; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px rgba(30,155,215,.4); transition:background .2s ease, transform .2s ease;
   }
-  .a11y-toggle:hover{ background:var(--road); transform:translateY(-2px); }
+  .a11y-widget.dragging .a11y-toggle{ cursor:grabbing; }
+  .a11y-toggle:hover{ background:#1B87BC; transform:translateY(-2px); }
   .a11y-panel{
     position:absolute; bottom:calc(100% + 12px); left:0; width:250px;
     background:#fff; border-radius:16px; box-shadow:0 20px 45px rgba(0,0,0,.25);
@@ -1434,12 +1435,10 @@
 <div class="a11y-widget" id="a11yWidget">
   <button class="a11y-toggle" id="a11yToggleBtn" aria-haspopup="true" aria-expanded="false" aria-label="Opções de acessibilidade">
     <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-      <circle cx="13" cy="4.5" r="2"/>
-      <rect x="11.3" y="7" width="3.4" height="5" rx="1.5"/>
-      <rect x="12.2" y="10.8" width="6.5" height="2.1" rx="1" transform="rotate(34 12.2 10.8)"/>
-      <rect x="7.5" y="12" width="6" height="2.1" rx="1"/>
-      <circle cx="9" cy="17.3" r="4.3" fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <circle cx="16.2" cy="19.3" r="1.1"/>
+      <circle cx="14" cy="5" r="2"/>
+      <rect x="12.2" y="7.5" width="3.2" height="5.5" rx="1.6"/>
+      <rect x="9" y="12.8" width="5.5" height="1.8" rx="0.9"/>
+      <circle cx="9" cy="16.5" r="4.6" fill="none" stroke="currentColor" stroke-width="1.7"/>
     </svg>
   </button>
   <div class="a11y-panel" id="a11yPanel">
@@ -1582,9 +1581,74 @@
 
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      if(widget.dataset.dragged === 'true'){ widget.dataset.dragged = 'false'; return; }
       const isOpen = widget.classList.toggle('open');
       toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
+
+    // Arrastar o botão pra qualquer lugar da tela (mouse e toque)
+    (function enableDrag(){
+      let startX, startY, startLeft, startTop, moved;
+
+      function getPos(){
+        const rect = widget.getBoundingClientRect();
+        return { left: rect.left, top: rect.top };
+      }
+
+      function onPointerDown(e){
+        if(widget.classList.contains('open')) return; // não arrasta com o painel aberto
+        const pos = getPos();
+        startLeft = pos.left; startTop = pos.top;
+        startX = e.clientX; startY = e.clientY;
+        moved = false;
+        widget.style.left = startLeft + 'px';
+        widget.style.top = startTop + 'px';
+        widget.style.right = 'auto';
+        widget.style.bottom = 'auto';
+        document.addEventListener('pointermove', onPointerMove);
+        document.addEventListener('pointerup', onPointerUp);
+      }
+
+      function onPointerMove(e){
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if(Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+        if(!moved) return;
+        e.preventDefault();
+        widget.classList.add('dragging');
+        const maxLeft = window.innerWidth - widget.offsetWidth - 6;
+        const maxTop = window.innerHeight - widget.offsetHeight - 6;
+        const newLeft = Math.min(Math.max(6, startLeft + dx), maxLeft);
+        const newTop = Math.min(Math.max(6, startTop + dy), maxTop);
+        widget.style.left = newLeft + 'px';
+        widget.style.top = newTop + 'px';
+      }
+
+      function onPointerUp(){
+        document.removeEventListener('pointermove', onPointerMove);
+        document.removeEventListener('pointerup', onPointerUp);
+        widget.classList.remove('dragging');
+        if(moved){
+          widget.dataset.dragged = 'true';
+          try{
+            localStorage.setItem('rsacar_a11y_pos', JSON.stringify({ left: widget.style.left, top: widget.style.top }));
+          }catch(err){}
+        }
+      }
+
+      toggleBtn.addEventListener('pointerdown', onPointerDown);
+
+      // Restaura a posição salva, se existir
+      try{
+        const savedPos = JSON.parse(localStorage.getItem('rsacar_a11y_pos'));
+        if(savedPos && savedPos.left && savedPos.top){
+          widget.style.left = savedPos.left;
+          widget.style.top = savedPos.top;
+          widget.style.right = 'auto';
+          widget.style.bottom = 'auto';
+        }
+      }catch(err){}
+    })();
 
     document.addEventListener('click', (e) => {
       if(widget.classList.contains('open') && !widget.contains(e.target)){

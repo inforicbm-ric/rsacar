@@ -640,9 +640,9 @@
   }
   .local-row strong{display:block; font-size:.95rem;}
   .local-row span{font-size:.86rem; color:#5A6B84;}
-  .map-frame{border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); min-height:340px;}
-  .map-frame iframe{width:100%; height:100%; min-height:340px; border:0;}
-  @media(max-width:860px){ .local-grid{grid-template-columns:1fr;} }
+  .map-frame{border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); min-height:480px;}
+  .map-frame iframe{width:100%; height:100%; min-height:480px; border:0;}
+  @media(max-width:860px){ .local-grid{grid-template-columns:1fr;} .map-frame, .map-frame iframe{min-height:380px;} }
 
   /* ---------- CTA FINAL ---------- */
   /* ---------- NÚMEROS (PROVA SOCIAL) ---------- */
@@ -1398,7 +1398,7 @@
         <a class="btn btn-wpp" style="margin-top:10px;" href="https://wa.me/5524988540793" target="_blank" rel="noopener" data-i18n="local.cta">💬 Falar agora no WhatsApp</a>
       </div>
       <div class="map-frame">
-        <iframe src="https://www.google.com/maps?q=R.%20Roraima%2C%20156%2C%20Morada%20do%20Contorno%2C%20Resende%2C%20RJ&output=embed" loading="lazy" data-i18n-title="local.mapTitle" title="Mapa RSACAR"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.6388355872377!2d-44.50506962385059!3d-22.48020247955762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9e78e53a84a951%3A0x81f28faaff39d6f6!2sAuto%20Center%20-%20RSACAR!5e0!3m2!1spt-BR!2sbr!4v1786222353571!5m2!1spt-BR!2sbr" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" data-i18n-title="local.mapTitle" title="Mapa RSACAR" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -1434,11 +1434,13 @@
 <!-- ================= WIDGET DE ACESSIBILIDADE ================= -->
 <div class="a11y-widget" id="a11yWidget">
   <button class="a11y-toggle" id="a11yToggleBtn" aria-haspopup="true" aria-expanded="false" aria-label="Opções de acessibilidade">
-    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-      <circle cx="14" cy="5" r="2"/>
-      <rect x="12.2" y="7.5" width="3.2" height="5.5" rx="1.6"/>
-      <rect x="9" y="12.8" width="5.5" height="1.8" rx="0.9"/>
-      <circle cx="9" cy="16.5" r="4.6" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="6" x2="20" y2="6"/>
+      <circle cx="9" cy="6" r="2" fill="currentColor"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <circle cx="15" cy="12" r="2" fill="currentColor"/>
+      <line x1="4" y1="18" x2="20" y2="18"/>
+      <circle cx="7" cy="18" r="2" fill="currentColor"/>
     </svg>
   </button>
   <div class="a11y-panel" id="a11yPanel">

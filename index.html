@@ -2021,8 +2021,23 @@
 
   const burger = document.getElementById('burger');
   const navlinks = document.getElementById('navlinks');
-  burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navlinks.classList.toggle('open');
+  });
   navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  // Fecha o menu mobile ao tocar fora dele
+  document.addEventListener('click', (e) => {
+    if(navlinks.classList.contains('open') && !navlinks.contains(e.target) && e.target !== burger){
+      navlinks.classList.remove('open');
+    }
+  });
+
+  // Fecha o menu mobile ao rolar a página
+  window.addEventListener('scroll', () => {
+    if(navlinks.classList.contains('open')) navlinks.classList.remove('open');
+  }, { passive: true });
 
   // Rolar até a seção sem alterar o endereço na barra do navegador (mantém o link sempre "limpo" pra compartilhar)
   document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -1661,12 +1661,18 @@
     update();
   })();
 
-  // Cards expansíveis da seção Dicas
-  document.querySelectorAll('.dica-header').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.closest('.dica-card').classList.toggle('open');
+  // Cards expansíveis da seção Dicas (só um aberto por vez)
+  (function dicasAccordion(){
+    const allCards = document.querySelectorAll('.dica-card');
+    document.querySelectorAll('.dica-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.dica-card');
+        const willOpen = !card.classList.contains('open');
+        allCards.forEach(c => c.classList.remove('open'));
+        if(willOpen) card.classList.add('open');
+      });
     });
-  });
+  })();
 
   // Widget de acessibilidade
   (function a11yWidget(){

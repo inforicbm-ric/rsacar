@@ -696,6 +696,15 @@
   }
   .local-row strong{display:block; font-size:.95rem;}
   .local-row span{font-size:.86rem; color:#5A6B84;}
+  .open-status{
+    display:flex; align-items:center; gap:6px; margin-top:6px;
+    font-size:.8rem; font-weight:600;
+  }
+  .open-status .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .open-status.is-open{ color:#1EAE54; }
+  .open-status.is-open .dot{ background:#1EAE54; box-shadow:0 0 0 3px rgba(30,174,84,.2); }
+  .open-status.is-closed{ color:#B4302A; }
+  .open-status.is-closed .dot{ background:#B4302A; box-shadow:0 0 0 3px rgba(180,48,42,.15); }
   .map-frame{border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); min-height:480px;}
   .map-frame iframe{width:100%; height:100%; min-height:480px; border:0;}
   @media(max-width:860px){ .local-grid{grid-template-columns:1fr;} .map-frame, .map-frame iframe{min-height:380px;} }
@@ -1517,7 +1526,11 @@
         </div>
         <div class="local-row">
           <div class="ico">🕒</div>
-          <div><strong data-i18n="local.hoursLabel">Horário</strong><span data-i18n="local.hoursValue">Segunda a sexta, das 08:00 às 18:00</span></div>
+          <div>
+            <strong data-i18n="local.hoursLabel">Horário</strong>
+            <span data-i18n="local.hoursValue">Segunda a sexta, das 08:00 às 18:00</span>
+            <span class="open-status" id="openStatus"></span>
+          </div>
         </div>
         <div class="local-row">
           <div class="ico">💬</div>
@@ -1672,6 +1685,62 @@
         if(willOpen) card.classList.add('open');
       });
     });
+  })();
+
+  // Selo de Aberto agora / Fechado (Segunda a sexta, 08:00–18:00)
+  (function openStatus(){
+    const el = document.getElementById('openStatus');
+    if(!el) return;
+
+    const DAY_NAMES = {
+      pt: ['domingo','segunda','terça','quarta','quinta','sexta','sábado'],
+      en: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+      es: ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],
+    };
+    const TEXT = {
+      pt: { open: 'Aberto agora', closedToday: (h) => `Fechado — abre hoje às ${h}`, closedOther: (d,h) => `Fechado — abre ${d} às ${h}` },
+      en: { open: 'Open now', closedToday: (h) => `Closed — opens today at ${h}`, closedOther: (d,h) => `Closed — opens ${d} at ${h}` },
+      es: { open: 'Abierto ahora', closedToday: (h) => `Cerrado — abre hoy a las ${h}`, closedOther: (d,h) => `Cerrado — abre el ${d} a las ${h}` },
+    };
+
+    function update(){
+      const lang = (window.currentLang && TEXT[window.currentLang]) ? window.currentLang : 'pt';
+      const now = new Date();
+      const day = now.getDay(); // 0=domingo ... 6=sábado
+      const hour = now.getHours() + now.getMinutes() / 60;
+      const isWeekday = day >= 1 && day <= 5;
+      const isOpen = isWeekday && hour >= 8 && hour < 18;
+
+      el.classList.remove('is-open', 'is-closed');
+
+      if(isOpen){
+        el.classList.add('is-open');
+        el.innerHTML = `<span class="dot"></span>${TEXT[lang].open}`;
+        return;
+      }
+
+      el.classList.add('is-closed');
+      // Data/hora do próximo horário de abertura (próximo dia útil às 08:00)
+      let daysAhead = 1;
+      if(isWeekday && hour < 8) daysAhead = 0; // ainda hoje, antes das 8h
+      else {
+        let nextDay = (day + 1) % 7;
+        daysAhead = 1;
+        while(nextDay < 1 || nextDay > 5){ nextDay = (nextDay + 1) % 7; daysAhead++; }
+      }
+
+      if(daysAhead === 0){
+        el.innerHTML = `<span class="dot"></span>${TEXT[lang].closedToday('08:00')}`;
+      } else {
+        const nextDayIndex = (day + daysAhead) % 7;
+        const dayLabel = DAY_NAMES[lang][nextDayIndex];
+        el.innerHTML = `<span class="dot"></span>${TEXT[lang].closedOther(dayLabel, '08:00')}`;
+      }
+    }
+
+    update();
+    window.updateOpenStatus = update; // pra reagir à troca de idioma
+    setInterval(update, 60000); // atualiza a cada minuto
   })();
 
   // Widget de acessibilidade
@@ -2247,6 +2316,7 @@
 
       // Atualiza a mensagem dinâmica do diagnóstico (sintomas marcados) no novo idioma
       if(typeof window.diagUpdate === 'function') window.diagUpdate();
+      if(typeof window.updateOpenStatus === 'function') window.updateOpenStatus();
     }
 
     const langSwitchEl = document.getElementById('langSwitch');

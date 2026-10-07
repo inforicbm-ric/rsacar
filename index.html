@@ -751,9 +751,16 @@
   .cta-final .btn-lg{margin-top:30px;}
   .cta-photo{
     border-radius:20px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08);
-    aspect-ratio:4/3;
+    aspect-ratio:4/3; transition:box-shadow .3s ease, transform .3s ease;
   }
-  .cta-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .cta-photo:hover{
+    box-shadow:0 30px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.1), 0 0 50px rgba(30,155,215,.5);
+    transform:translateY(-4px);
+  }
+  .cta-photo img{
+    width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;
+  }
+  .cta-photo:hover img{ transform:scale(1.06); }
   @media(max-width:900px){
     .cta-final .wrap{ grid-template-columns:1fr; text-align:center; }
     .cta-final p{ margin-left:auto; margin-right:auto; }
